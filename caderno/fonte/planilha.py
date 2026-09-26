@@ -49,7 +49,7 @@ header(ws, ['Código', 'Ambiente', 'Tipo', 'Descrição', 'X início', 'Y iníci
        [9, 34, 18, 44, 10, 10, 10, 10, 16, 60])
 tot = {}
 for cod in ('R01', 'R02'):
-    ws.append([cod, {'R01': 'RODAPÉ PORCELANATO SANTORINI OFW NAT — h = 8 cm', 'R02': 'RODAPÉ PORCELANATO SANTORINI SGR HARD — h = 8 cm'}[cod]])
+    ws.append([cod, {'R01': 'RODAPÉ EMBUTIDO — PORCELANATO SANTORINI OFW NAT — h = 8 cm', 'R02': 'RODAPÉ EMBUTIDO — PORCELANATO SANTORINI SGR HARD — h = 8 cm'}[cod]])
     for c in ws[ws.max_row]: c.fill = SEC; c.font = SF
     liq_rows = []
     for r in [x for x in D['rodapes'] if x['cod'] == cod]:

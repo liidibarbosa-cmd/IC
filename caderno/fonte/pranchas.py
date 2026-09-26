@@ -473,7 +473,7 @@ def folha1():
 </div>
 <div class="abs" style="left:92mm;top:322mm;width:77mm">
   <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.6mm"><span class="ttl">Rodapés</span><span style="font-size:5.6pt;color:{C['olive2']}">metros lineares</span></div>
-  <table><tr><th>Cód.</th><th>Rodapé (h = 8 cm)</th><th class="n">Líquido</th></tr>
+  <table><tr><th>Cód.</th><th>Rodapé embutido (h = 8 cm)</th><th class="n">Líquido</th></tr>
   <tr><td><span class="cb">R01</span></td><td>Santorini OFW NAT — mesmo piso P01</td><td class="n">{br(R['R01'])}</td></tr>
   <tr><td><span class="cb gr">R02</span></td><td>Santorini SGR HARD — mesmo piso P02</td><td class="n">{br(R['R02'])}</td></tr>
   <tr class="tot"><td colspan="2">Total</td><td class="n">{br(R['R01'] + R['R02'])}</td></tr></table>
@@ -555,12 +555,12 @@ def folha3():
     leg = f"""
 <div class="abs leg" style="left:250.5mm;top:10mm;width:37mm">
   <div class="lbl">Legenda</div>
-  <div class="it"><div class="ln" style="border-top:0.75mm solid {C['rust']}"></div><div><b>R01</b> Rodapé Santorini OFW NAT, h = 8 cm</div></div>
-  <div class="it"><div class="ln" style="border-top:0.75mm solid #2f5f55"></div><div><b>R02</b> Rodapé Santorini SGR HARD, h = 8 cm</div></div>
+  <div class="it"><div class="ln" style="border-top:0.75mm solid {C['rust']}"></div><div><b>R01</b> Rodapé Santorini OFW NAT, embutido, h = 8 cm</div></div>
+  <div class="it"><div class="ln" style="border-top:0.75mm solid #2f5f55"></div><div><b>R02</b> Rodapé Santorini SGR HARD, embutido, h = 8 cm</div></div>
   <div class="it"><svg width="7mm" height="4mm" viewBox="0 0 7 4" style="margin-right:2.4mm;flex:none"><line x1="0" y1="2.6" x2="4.2" y2="2.6" stroke="{C['rust']}" stroke-width="0.75"/><line x1="4.1" y1="3.2" x2="4.1" y2="0.8" stroke="{C['rust']}" stroke-width="0.25"/></svg><div>Início / fim de trecho de rodapé</div></div>
   <div class="it"><svg width="7mm" height="5mm" viewBox="0 0 7 5" style="margin-right:2.4mm;flex:none"><circle cx="3.5" cy="2.5" r="2.1" fill="{C['rust']}"/></svg><div>Vão de porta descontado — largura do DWG (m)</div></div>
   <div class="it"><div class="sw" style="background:{C['bg']}"></div><div>Face de parede sem rodapé</div></div>
-  <div class="small" style="margin-top:3mm">O rodapé é do mesmo revestimento do piso do ambiente onde está instalado. Janelas não são descontadas.</div>
+  <div class="small" style="margin-top:3mm">O rodapé é do mesmo revestimento do piso do ambiente onde está instalado e fica embutido na parede (detalhe D1, folha 06/{NF:02d}). Janelas não são descontadas.</div>
   <div class="lbl" style="margin-top:7mm">Escala</div>
   <div class="disp" style="font-size:21pt;margin-top:1.4mm">1/100</div>
   {escala_bar(100)}
@@ -586,7 +586,7 @@ def folha3():
 </div>
 <div class="abs" style="left:92mm;top:322mm;width:77mm">
   <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.6mm"><span class="ttl">Rodapés</span><span style="font-size:5.6pt;color:{C['olive2']}">metros lineares</span></div>
-  <table><tr><th>Cód.</th><th>Rodapé (h = 8 cm)</th><th class="n">Líquido</th></tr>
+  <table><tr><th>Cód.</th><th>Rodapé embutido (h = 8 cm)</th><th class="n">Líquido</th></tr>
   <tr><td><span class="cb">R01</span></td><td>Santorini OFW NAT</td><td class="n">{br(R['R01'])}</td></tr>
   <tr><td><span class="cb gr">R02</span></td><td>Santorini SGR HARD</td><td class="n">{br(R['R02'])}</td></tr>
   <tr class="tot"><td colspan="2">Total</td><td class="n">{br(R['R01'] + R['R02'])}</td></tr></table>
@@ -599,7 +599,7 @@ def folha3():
 
 def folha4():
     rows = ''
-    nomes = {'R01': 'R01 · Rodapé Porcelanato Santorini OFW NAT · h = 8 cm', 'R02': 'R02 · Rodapé Porcelanato Santorini SGR HARD · h = 8 cm'}
+    nomes = {'R01': 'R01 · Rodapé embutido · Porcelanato Santorini OFW NAT · h = 8 cm', 'R02': 'R02 · Rodapé embutido · Porcelanato Santorini SGR HARD · h = 8 cm'}
     for c in ('R01', 'R02'):
         rows += f'<tr class="sec"><td colspan="8">{esc(nomes[c]).upper()}</td></tr>'
         for r in [x for x in D['rodapes'] if x['cod'] == c]:
@@ -627,7 +627,7 @@ def folha4():
 <div class="normas notes" style="top:332mm;height:78.1mm;display:flex;gap:6mm;padding-top:4.5mm">
 <div style="flex:1"><h4 style="margin-top:0">Regra de cálculo</h4><ol>
 <li><b class="nn">1</b><span>Rodapé líquido = soma dos trechos de parede − vãos de porta aplicáveis. Janelas não são descontadas. Cada face de parede entra uma única vez; as duas faces de uma mesma parede pertencem a ambientes diferentes.</span></li>
-<li><b class="nn">2</b><span>Material do rodapé = piso do ambiente: P01 → R01 (Santorini OFW NAT); P02 → R02 (Santorini SGR HARD). Altura 8 cm (informada), rejunte igual ao do piso. Sem rodapé em PP01 (rampa, acesso externo e calçada) e no Corredor Lateral Externo.</span></li>
+<li><b class="nn">2</b><span>Material do rodapé = piso do ambiente: P01 → R01 (Santorini OFW NAT); P02 → R02 (Santorini SGR HARD). Altura 8 cm, embutido na parede em toda a casa (informado; detalhe D1), rejunte igual ao do piso. Sem rodapé em PP01 (rampa, acesso externo e calçada) e no Corredor Lateral Externo.</span></li>
 <li><b class="nn">3</b><span>Trechos sem rodapé: faces abertas da garagem (frente 7,40 e lateral 4,50), lado aberto da varanda, bordas da piscina e limites com áreas verdes.</span></li>
 </ol></div>
 <div style="flex:1"><h4 style="margin-top:0">&nbsp;</h4><ol>
@@ -654,6 +654,7 @@ PEND_DECISAO = [
     'PP01: formato/granulometria da pedra portuguesa branca, assentamento e rejunte.',
     'Calçada: término junto à Av. 3 (linhas abertas no DWG). A Prefeitura indica concreto vassourado na faixa de acesso e grama na faixa de serviço; confirmar a exigência municipal.',
     'Acesso externo lateral (15,03 m²): a Prefeitura indica concreto vassourado; a planta do caderno de esquadrias mostra grama com pisantes. Confirmar o limite da pedra portuguesa.',
+    'Rodapé embutido: profundidade do rebaixo no reboco e acabamento da junta superior; executar o rebaixo antes do acabamento da parede.',
     'Rodapé em áreas molhadas: compatibilizar com o Caderno 02/02 (revestimento de parede).',
     'Soleiras de mármore × trilhos embutidos de P05, P07 e P10, e posição do trilho de P04 (não desenhada no DWG).',
     'Borda da piscina e arremates entre piso e jardim — não documentados.',
@@ -719,7 +720,7 @@ def folha6():
 <div class="abs" style="left:10mm;top:35mm;width:277mm;display:grid;grid-template-columns:1fr 1fr;gap:6mm">{cards}</div>
 <div class="normas notes" style="top:332mm;height:78.1mm;padding-top:4.5mm">
 <h4 style="margin-top:0">Onde se aplica</h4><ol>
-<li><b class="nn">D1</b><span>Todos os rodapés R01 e R02 (folhas 03/{NF:02d} e 04/{NF:02d}).</span></li>
+<li><b class="nn">D1</b><span>Todos os rodapés R01 e R02, embutidos na parede em toda a casa (folhas 03/{NF:02d} e 04/{NF:02d}).</span></li>
 <li><b class="nn">D2</b><span>Encontros do mesmo material com desnível (critério 1 da folha 05/{NF:02d}). Níveis não documentados neste caderno.</span></li>
 <li><b class="nn">D3</b><span>Trocas de material T01 a T09 — 24,90 m de soleira (folha 05/{NF:02d}).</span></li>
 <li><b class="nn">D4</b><span>Portas de correr P04, P05 e P07; P10 A CONFIRMAR. Nas portas externas, compatibilizar o trilho com a soleira D3.</span></li>

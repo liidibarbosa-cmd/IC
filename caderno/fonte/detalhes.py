@@ -45,23 +45,26 @@ def svg(k, body, w=127, h=100):
 
 
 def d1():
-    # corte: parede + rodapé 8 cm + piso
+    # corte: parede + rodapé embutido 8 cm (face alinhada ao acabamento da parede) + piso
     b = ''
     b += '<rect x="6" y="4" width="22" height="70" fill="url(#pa1)" stroke="#8f8676" stroke-width="0.2"/>'      # alvenaria
-    b += '<rect x="28" y="4" width="3" height="70" fill="#efe9dd" stroke="#8f8676" stroke-width="0.2"/>'        # reboco
-    b += '<rect x="31" y="66" width="72" height="12" fill="url(#cp1)" stroke="#8f8676" stroke-width="0.2"/>'   # contrapiso
-    b += '<rect x="31" y="64" width="72" height="2" fill="url(#ar1)"/>'                                          # argamassa
-    b += f'<rect x="31" y="60.6" width="72" height="3.4" fill="{P01}" stroke="{INK}" stroke-width="0.3"/>'      # porcelanato
-    b += '<rect x="31" y="36" width="1.1" height="24.6" fill="url(#ar1)"/>'
-    b += f'<rect x="32.1" y="36" width="3.4" height="24.6" fill="{P01}" stroke="{INK}" stroke-width="0.3"/>'   # rodapé
-    b += f'<rect x="35.5" y="59.8" width="0.8" height="0.8" fill="#b7a58a"/>'                                   # rejunte
-    b += cota_v(40, 36, 60.6, 'h = 8 cm')
-    b += lead(33.8, 44, 60, 30, 'Rodapé: peça recortada do mesmo porcelanato\ndo piso do ambiente (R01 = P01; R02 = P02)')
-    b += lead(36.2, 60.2, 60, 46, 'Encontro rodapé × piso: rejunte cor Corda')
-    b += lead(70, 62.2, 78, 52, 'Porcelanato 90 × 90\nP01 7,0 mm · P02 8,0 mm')
-    b += lead(95, 65, 112, 86, 'Argamassa colante (tipo A CONFIRMAR)', anchor='end')
-    b += lead(60, 74, 52, 93, 'Contrapiso', anchor='end')
-    b += lead(14, 20, 12, 90, 'Parede', anchor='start')
+    b += '<rect x="28" y="4" width="4" height="31.2" fill="#efe9dd" stroke="#8f8676" stroke-width="0.2"/>'      # reboco
+    b += '<rect x="28" y="36" width="0.9" height="24.6" fill="url(#ar1)"/>'                                      # argamassa no rebaixo
+    b += f'<rect x="28.9" y="36" width="3.1" height="24.6" fill="{P01}" stroke="{INK}" stroke-width="0.3"/>'   # rodapé embutido
+    b += f'<rect x="28" y="35.2" width="4" height="0.8" fill="#b7a58a"/>'                                       # junta superior
+    b += '<rect x="28" y="66" width="75" height="12" fill="url(#cp1)" stroke="#8f8676" stroke-width="0.2"/>'   # contrapiso
+    b += '<rect x="28" y="64" width="75" height="2" fill="url(#ar1)"/>'                                          # argamassa
+    b += f'<rect x="28" y="60.6" width="75" height="3.4" fill="{P01}" stroke="{INK}" stroke-width="0.3"/>'      # porcelanato
+    b += f'<path d="M32,4 L32,74" stroke="{RUST}" stroke-width="0.25" stroke-dasharray="1.2 0.8"/>'             # plano da parede
+    b += cota_v(38, 36, 60.6, 'h = 8 cm')
+    b += lead(30.5, 46, 56, 30, 'Rodapé embutido na parede: face alinhada ao\nacabamento da parede (sem saliência)')
+    b += lead(28.5, 50, 20, 84, 'Rebaixo no reboco na altura do rodapé —\nprofundidade = peça + argamassa (A CONFIRMAR)', anchor='start')
+    b += lead(30, 35.6, 56, 18, 'Junta superior rodapé × parede: acabamento A CONFIRMAR')
+    b += lead(32.2, 60.8, 60, 72, 'Peça recortada do mesmo\nporcelanato do piso (R01 = P01;\nR02 = P02) · rejunte cor Corda')
+    b += lead(80, 62.2, 84, 52, 'Porcelanato 90 × 90\nP01 7,0 mm · P02 8,0 mm')
+    b += lead(100, 70, 104, 93, 'Argamassa colante / contrapiso', anchor='end')
+    b += lead(14, 20, 8, 96, 'Parede', anchor='start')
+    b += (f'<text x="33" y="7" font-family="Manrope" font-size="2.2" fill="{RUST}">plano de acabamento da parede</text>')
     return svg(1, b)
 
 
@@ -144,7 +147,7 @@ def d4():
 
 
 CARDS = [
-    ('D1', 'Rodapé em porcelanato — h = 8 cm', 'Corte ilustrativo · sem escala', d1),
+    ('D1', 'Rodapé embutido em porcelanato — h = 8 cm', 'Corte ilustrativo · sem escala', d1),
     ('D2', 'Perfil metálico em L — mesmo material com desnível', 'Corte ilustrativo · sem escala', d2),
     ('D3', 'Soleira baguete — mármore Itaúnas', 'Corte e planta ilustrativos · sem escala', d3),
     ('D4', 'Trilho de porta de correr embutido no piso', 'Corte ilustrativo · sem escala', d4),
