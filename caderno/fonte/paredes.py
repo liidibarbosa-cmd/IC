@@ -6,6 +6,7 @@ Cada pano de parede registra a face do DWG, a altura informada e as aberturas de
 """
 import json, math, os, csv, html
 import pranchas as PR
+from shapely.geometry import LineString
 from pranchas import Planta, C, br, esc, tags
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
@@ -17,20 +18,20 @@ ARQ, INF, OBRA = 'Arquivo', 'Informado', 'Obra'
 # ------------------------------------------------------------------ produtos
 PROD = {
     'RP01': dict(nome='Pedra Moledo', fab='Pedreira (compra à parte)', formato='A CONFIRMAR', esp='A CONFIRMAR',
-                 acab='Natural (pedra)', rejunte='A CONFIRMAR', linha='#3fa7d6', fill='#dfe6e2'),
+                 acab='Natural (pedra)', rejunte='A CONFIRMAR', linha='#7d6b4f', fill='#ece3cf'),
     'RP02': dict(nome='Porcelanato Santorini OFW NAT', fab='Portinari', formato='90 × 90 cm', esp='7,0 mm',
-                 acab='Natural (NAT), retificado', rejunte='Corda · junta seca', linha='#2c58a0', fill='#ecdfc4'),
+                 acab='Natural (NAT), retificado', rejunte='Corda · junta seca', linha='#a88a5c', fill='#ecdfc4'),
     'RP03': dict(nome='Porcelanato Confete WH NAT', fab='CEUSA · cód. 5041209A', formato='100 × 100 cm', esp='9,0 mm',
-                 acab='Natural, retificado', rejunte='A CONFIRMAR', linha='#e3bf3c', fill='#f6f3ec'),
+                 acab='Natural, retificado', rejunte='A CONFIRMAR', linha='#8f887a', fill='#f6f3ec'),
     'RP04': dict(nome='Porcelanato Confete PK NAT (Pink)', fab='CEUSA · cód. 5041210A', formato='100 × 100 cm', esp='9,0 mm',
                  acab='Natural, retificado', rejunte='Sugestão do fabricante: Quartzolit Preto Grafite, Rejuntabras Marfim ou Quartzobras Castor',
-                 linha='#d64f8e', fill='#f1d6dc'),
+                 linha='#b56f62', fill='#e6c0b4'),
     'RP05': dict(nome='Revestimento Fatto Oliva AC', fab='Decortiles · SC 8068139', formato='30 × 90 cm', esp='A CONFIRMAR',
-                 acab='Acetinado (AC), V1', rejunte='A CONFIRMAR', linha='#5f8d34', fill='#b5b98c'),
+                 acab='Acetinado (AC), V1', rejunte='A CONFIRMAR', linha='#6a6f42', fill='#b5b98c'),
     'RP06': dict(nome='Travertino Rock Face', fab='Pedreira (compra à parte)', formato='A CONFIRMAR', esp='A CONFIRMAR',
-                 acab='Rock face (bruto)', rejunte='A CONFIRMAR', linha='#7a4aa3', fill='#e4d6bd'),
+                 acab='Rock face (bruto)', rejunte='A CONFIRMAR', linha='#8c6d4a', fill='#e4d6bd'),
     'RP07': dict(nome='Cerâmica simples — Eliane Forma Branco AC (fundo da marcenaria)', fab='Eliane · SC 8039383', formato='30 × 40 cm',
-                 esp='6,5 mm', acab='Acetinado, V1', rejunte='Junta 2 mm (fabricante) · cor A CONFIRMAR', linha='#e0a01e', fill='#fbfaf6'),
+                 esp='6,5 mm', acab='Acetinado, V1', rejunte='Junta 2 mm (fabricante) · cor A CONFIRMAR', linha='#5f6a70', fill='#fbfaf6'),
 }
 
 # --------------------------------------------------------------------- panos
@@ -121,55 +122,132 @@ PEND = [
     'Banheiro Externo: o quadro de esquadrias indica J06 sobre P11 (outra parede); o nicho segue o fundo do box, conforme informado.',
     'Balcão: revestidas apenas as duas faces de 1,90 × 1,00 m; topo e cabeceiras (0,15 m) sem revestimento — confirmar. Mureta só consta no DWG da Prefeitura.',
     'Moledo e Travertino Rock Face (pedreira): formato, espessura, assentamento e rejunte A CONFIRMAR. Confete WH e Fatto Oliva: rejunte e espessura A CONFIRMAR na ficha.',
+    'Imagens de referência: divergências anotadas nas folhas 03 a 05 (formato do Confete Pink, fundo do box do Banheiro Externo, extensão na Lavanderia).',
     'Paginação não faz parte deste caderno. Quantitativos líquidos, sem perdas de compra. Conferir todas as medidas no local.',
 ]
 
 
 # ================================================================ planta 1/100
-def planta():
-    pl = Planta(3.6, 18.3, 17.9, 40.6, 100)
-    PR.base(pl, tint=0.35, calcada=False)
-    # balcão (DWG Prefeitura) e churrasqueira (informada)
-    pl.poly([(7.241, 24.036), (9.141, 24.036), (9.141, 24.186), (7.241, 24.186)], fill='#cfc6b3', stroke=C['ink'], sw=0.13)
-    pl.poly([(11.291, 31.436), (12.091, 31.436), (12.091, 32.336), (11.291, 32.336)], fill='#e4d6bd', stroke=C['ink'], sw=0.18)
-    pl.line([(11.291, 31.436), (12.091, 32.336)], C['ink'], 0.1)
-    pl.line([(11.291, 32.336), (12.091, 31.436)], C['ink'], 0.1)
-    for p in PANOS:
-        a, b = p['a'], p['b']
+def base_neutra(pl):
+    """Planta limpa: pisos neutros, paredes cheias, vãos e esquadrias do DWG (mesma geometria do caderno 01/02)."""
+    PR.padroes(pl)
+    for v in PR.G['verdes']:
+        pl.poly(v, fill=f'url(#gr_{pl.s})', stroke='#a3ab85', sw=0.08, extra='fill-opacity="0.55"')
+    for zid, z in PR.Z.items():
+        if zid == 'CAL':
+            continue
+        f = '#fdfbf6' if z['cod'] in ('P01', 'P02') else '#f2eee4'
+        pl.poly(z['pts'], z['holes'], fill=f, stroke='none')
+    pl.poly(PR.G['piscina'], fill='#e3ebe9', stroke=C['ink'], sw=0.15)
+    lote = PR.G['lote'] + [PR.G['lote'][0]]
+    pl.line(lote, C['olive2'], 0.15, dash=(3.0, 0.8, 0.5, 0.8))
+    for w in PR.G['paredes']:
+        pl.poly(w, fill=C['ink'], stroke=C['ink'], sw=0.05)
+    for vid, v in PR.D['vaos'].items():
+        if vid == 'P04':
+            continue
+        a, b = v['a'], v['b']
+        if vid == 'P03':
+            a, b = (17.266, a[1]), (17.266, b[1])
+        faixa = LineString([a, b]).buffer(0.075, cap_style=2)
+        pl.poly([tuple(p) for p in faixa.exterior.coords][:-1], fill=C['porta'], stroke='none')
         L = math.dist(a, b)
-        ux, uy = (b[0] - a[0]) / L, (b[1] - a[1]) / L
-        n1 = (-uy, ux)
-        m = ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
-        s = 1 if (p['lado'][0] - m[0]) * n1[0] + (p['lado'][1] - m[1]) * n1[1] > 0 else -1
-        d = 0.075
-        off = (n1[0] * s * d, n1[1] * s * d)
-        pl.line([(a[0] + off[0], a[1] + off[1]), (b[0] + off[0], b[1] + off[1])], PROD[p['cod']]['linha'], 1.3)
-    nomes = [((4.55, 38.3), 'BANHEIRO CASAL', 90), ((7.69, 32.55), 'WC 02', 0), ((7.69, 30.9), 'WC 01', 0),
-             ((12.45, 33.55), 'BANHEIRO EXTERNO', 0), ((7.07, 21.7), 'LAVANDERIA', 0), ((7.4, 25.7), 'COZINHA', 0),
-             ((13.2, 23.4), 'SALA TV / SALA JANTAR', 0), ((13.4, 29.3), 'VARANDA GOURMET', 0), ((7.9, 17.0), '', 0),
-             ((12.27, 38.0), 'QUARTO CASAL', 0), ((8.04, 38.0), 'CLOSET CASAL', 0), ((7.74, 34.7), 'QUARTO 02', 0),
-             ((7.74, 28.3), 'QUARTO 01', 0), ((12.94, 35.1), 'ESCRITÓRIO', 0), ((10.55, 32.0), 'CIRCULAÇÃO', 90)]
-    for p, t, r in nomes:
-        if t:
-            pl.text(p, t, size=4.6, weight=700, ls=0.35, rot=-r, fill='#5a5d49')
-    pl.text((8.2, 23.6), 'balcão 1,90 × 0,15', size=3.8, weight=500, italic=True)
-    pl.text((12.55, 30.95), 'churrasqueira', size=3.8, weight=500, italic=True)
-    pl.text((12.55, 30.6), '0,90 × 0,80', size=3.8, weight=500, italic=True)
-    # marcadores de elevação: (posição, ângulo da seta em graus — direção para onde se olha)
-    MK = {'E01': ((13.4, 18.75), 90), 'E02': ((16.35, 21.8), 180), 'E03': ((13.4, 20.85), 270), 'E04': ((5.55, 37.8), 270),
-          'E05': ((8.25, 32.33), 180), 'E06': ((8.25, 30.68), 180), 'E07': ((14.05, 33.0), 180), 'E08': ((7.07, 21.0), 270),
-          'E09': ((8.7, 25.4), 135), 'E10': ((8.2, 23.1), 90), 'E11': ((13.3, 31.0), 180), 'E12': ((11.69, 29.9), 90)}
-    for e, (p, ang) in MK.items():
+        nx, ny = -(b[1] - a[1]) / L * 0.075, (b[0] - a[0]) / L * 0.075
+        for k in (1, -1):
+            pl.line([(a[0] + k * nx, a[1] + k * ny), (b[0] + k * nx, b[1] + k * ny)], C['ink'], 0.07)
+    for L in PR.G['linhas']['caixilhos']:
+        pl.line(L, C['ink'], 0.12)
+    for L in PR.G['linhas']['portas']:
+        pl.line(L, '#6b6d5c', 0.08)
+
+
+BANDA = 0.10     # espessura gráfica da faixa de revestimento na planta (fora de escala)
+
+
+def faixa_pano(p):
+    a, b = p['a'], p['b']
+    L = math.dist(a, b)
+    ux, uy = (b[0] - a[0]) / L, (b[1] - a[1]) / L
+    n1 = (-uy, ux)
+    m = ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
+    s = 1 if (p['lado'][0] - m[0]) * n1[0] + (p['lado'][1] - m[1]) * n1[1] > 0 else -1
+    o = (n1[0] * s * BANDA, n1[1] * s * BANDA)
+    pts = [a, b, (b[0] + o[0], b[1] + o[1]), (a[0] + o[0], a[1] + o[1])]
+    mid = (m[0] + o[0] / 2, m[1] + o[1] / 2)
+    return pts, mid
+
+
+# etiquetas: (código, posição da etiqueta, [ids dos panos apontados])
+TAGS = [
+    ('RP01', (14.75, 18.75), ['F-S']), ('RP01', (16.55, 22.9), ['F-L']), ('RP01', (14.3, 20.45), ['S-TV']),
+    ('RP03', (5.17, 35.55), ['E04-F']), ('RP02', (5.17, 38.95), ['E04-L1', 'E04-L2']),
+    ('RP04', (4.95, 32.33), ['E05-F']), ('RP02', (7.75, 32.33), ['E05-L1', 'E05-L2']),
+    ('RP04', (4.95, 30.68), ['E06-F']), ('RP02', (7.75, 30.68), ['E06-L1', 'E06-L2']),
+    ('RP05', (12.0, 33.12), ['E07-F']), ('RP02', (13.0, 33.12), ['E07-L1', 'E07-L2']),
+    ('RP02', (6.35, 20.95), ['LAV']), ('RP07', (6.75, 25.85), ['COZ-O', 'COZ-N']),
+    ('RP02', (6.55, 24.11), ['BAL-S', 'BAL-N']), ('RP06', (13.2, 31.25), ['VAR-F', 'CH-F', 'CH-L']),
+]
+# marcadores de elevação: posição e direção do olhar (graus, 0 = leste, 90 = norte)
+MARC = {'E01': ((12.2, 18.75), 90), 'E02': ((16.45, 21.4), 180), 'E03': ((12.6, 20.75), 270), 'E04': ((5.62, 38.0), 270),
+        'E05': ((8.62, 32.33), 180), 'E06': ((8.62, 30.68), 180), 'E07': ((14.05, 33.12), 180), 'E08': ((7.55, 20.95), 270),
+        'E09': ((8.6, 25.75), 150), 'E10': ((9.5, 23.35), 90), 'E11': ((14.05, 29.95), 180), 'E12': ((11.72, 30.4), 90)}
+
+
+def planta():
+    pl = Planta(3.6, 18.2, 17.4, 40.35, 75)
+    base_neutra(pl)
+    # balcão (DWG Prefeitura) e churrasqueira (informada) — contornos
+    pl.poly([(7.241, 24.036), (9.141, 24.036), (9.141, 24.186), (7.241, 24.186)], fill='#e7e0d1', stroke=C['ink'], sw=0.13)
+    ch = [(11.291, 31.436), (12.091, 31.436), (12.091, 32.336), (11.291, 32.336)]
+    pl.poly(ch, fill='#ede4d2', stroke=C['ink'], sw=0.18)
+    pl.line([ch[0], ch[2]], '#8a8272', 0.08)
+    pl.line([ch[1], ch[3]], '#8a8272', 0.08)
+    # faixas de revestimento
+    mids = {}
+    for p in PANOS:
+        pts, mid = faixa_pano(p)
+        pl.poly(pts, fill=PROD[p['cod']]['linha'], stroke=C['ink'], sw=0.06)
+        mids[p['id']] = mid
+    # nomes dos ambientes (discretos)
+    for p, t, r in [((4.55, 38.3), 'BANHEIRO CASAL', 90), ((7.69, 32.85), 'WC 02', 0), ((7.69, 31.2), 'WC 01', 0),
+                    ((13.2, 33.62), 'BANHEIRO EXTERNO', 0), ((7.07, 21.75), 'LAVANDERIA', 0), ((7.9, 25.2), 'COZINHA', 0),
+                    ((13.2, 24.2), 'SALA TV / SALA JANTAR', 0), ((13.3, 28.55), 'VARANDA GOURMET', 0),
+                    ((12.27, 38.1), 'QUARTO CASAL', 0), ((8.04, 38.1), 'CLOSET CASAL', 0), ((7.74, 34.75), 'QUARTO 02', 0),
+                    ((7.74, 28.3), 'QUARTO 01', 0), ((12.94, 35.15), 'ESCRITÓRIO', 0), ((10.55, 32.0), 'CIRCULAÇÃO INTERNA', 90),
+                    ((7.9, 17.6), 'GARAGEM', 0), ((4.92, 28.2), 'CORREDOR LATERAL EXTERNO', 90)]:
+        pl.text(p, t, size=4.2, weight=600, ls=0.45, rot=-r, fill='#77796a')
+    pl.text((8.19, 23.72), 'balcão 1,90 × 0,15', size=3.6, weight=500, italic=True, fill='#5a5d49')
+    pl.text((12.55, 32.0), 'churrasqueira', size=3.6, weight=500, italic=True, fill='#5a5d49', anchor='start')
+    pl.text((12.55, 31.72), '0,90 × 0,80', size=3.6, weight=500, italic=True, fill='#5a5d49', anchor='start')
+    # etiquetas com linha de chamada
+    for cod, pos, ids in TAGS:
+        for pid in ids:
+            t = mids[pid]
+            pl.line([pos, t], '#5a5d49', 0.12)
+            pl.add(f'<circle cx="{pl.P(t)[0]}" cy="{pl.P(t)[1]}" r="{pl.mm(0.45)}" fill="#5a5d49"/>')
+    for cod, pos, ids in TAGS:
+        x, y = pl.P(pos)
+        w, h = pl.mm(9.2), pl.mm(3.3)
+        pl.add(f'<rect x="{x - w / 2}" y="{y - h / 2}" width="{w}" height="{h}" rx="{h / 2}" fill="{PROD[cod]["linha"]}" '
+               f'stroke="{C["bg"]}" stroke-width="{pl.mm(0.35)}"/>'
+               f'<text x="{x}" y="{y + pl.mm(0.1)}" font-family="Manrope" font-size="{pl.pt(4.6)}" font-weight="700" fill="#fff" '
+               f'text-anchor="middle" dominant-baseline="middle" letter-spacing="{pl.pt(0.2)}">{cod}</text>')
+    # marcadores de elevação (código / folha)
+    for e, (p, ang) in MARC.items():
         x, y = pl.P(p)
-        r = pl.mm(2.6)
+        r = pl.mm(2.7)
         t = math.radians(-ang)
-        tip = (x + math.cos(t) * r * 1.75, y + math.sin(t) * r * 1.75)
-        b1 = (x + math.cos(t + 0.55) * r * 0.9, y + math.sin(t + 0.55) * r * 0.9)
-        b2 = (x + math.cos(t - 0.55) * r * 0.9, y + math.sin(t - 0.55) * r * 0.9)
-        pl.add(f'<path d="M{tip[0]},{tip[1]} L{b1[0]},{b1[1]} L{b2[0]},{b2[1]} Z" fill="{C["olive"]}"/>')
-        pl.add(f'<circle cx="{x}" cy="{y}" r="{r}" fill="{C["olive"]}" stroke="{C["bg"]}" stroke-width="{pl.mm(0.3)}"/>'
-               f'<text x="{x}" y="{y + pl.mm(0.1)}" font-family="Manrope" font-size="{pl.pt(4.4)}" font-weight="700" fill="{C["cream"]}" '
-               f'text-anchor="middle" dominant-baseline="middle">{e}</text>')
+        tip = (x + math.cos(t) * r * 1.85, y + math.sin(t) * r * 1.85)
+        b1 = (x + math.cos(t + 0.62) * r, y + math.sin(t + 0.62) * r)
+        b2 = (x + math.cos(t - 0.62) * r, y + math.sin(t - 0.62) * r)
+        folha = ELEV[e][2]
+        pl.add(f'<path d="M{tip[0]},{tip[1]} L{b1[0]},{b1[1]} L{b2[0]},{b2[1]} Z" fill="{C["ink"]}"/>'
+               f'<circle cx="{x}" cy="{y}" r="{r}" fill="#fdfbf6" stroke="{C["ink"]}" stroke-width="{pl.mm(0.25)}"/>'
+               f'<path d="M{x - r * 0.82},{y} L{x + r * 0.82},{y}" stroke="{C["ink"]}" stroke-width="{pl.mm(0.18)}"/>'
+               f'<text x="{x}" y="{y - r * 0.38}" font-family="Manrope" font-size="{pl.pt(3.9)}" font-weight="700" fill="{C["ink"]}" '
+               f'text-anchor="middle" dominant-baseline="middle">{e}</text>'
+               f'<text x="{x}" y="{y + r * 0.42}" font-family="Manrope" font-size="{pl.pt(3.5)}" font-weight="500" fill="{C["rust_t"]}" '
+               f'text-anchor="middle" dominant-baseline="middle">{folha:02d}</text>')
     return pl
 
 
@@ -178,25 +256,26 @@ def folha1():
     svg, wmm, hmm = pl.svg()
     left = 10 + (235 - wmm) / 2
     top = 10 + (307 - hmm) / 2
-    itens = ''.join(f"<div class='it'><div class='ln' style='border-top:1.3mm solid {v['linha']}'></div><div><b>{k}</b> {esc(v['nome'].split(' — ')[0])}</div></div>"
+    itens = ''.join(f"<div class='it' style='align-items:flex-start'><div class='sw' style='background:{v['linha']};border-color:{C['ink']};margin-top:0.4mm'></div>"
+                    f"<div><b>{k}</b> {esc(v['nome'].split(' — ')[0])}<div style='font-size:5.8pt;color:{C['olive2']}'>{esc(v['fab'])}</div></div></div>"
                     for k, v in PROD.items())
     leg = f"""
 <div class="abs leg" style="left:250.5mm;top:10mm;width:37mm">
   <div class="lbl">Legenda</div>{itens}
-  <div class="it"><svg width="7mm" height="6mm" viewBox="0 0 7 6" style="margin-right:2.4mm;flex:none"><path d="M3.5,0.2 L5,2.2 L2,2.2Z" fill="{C['olive']}"/><circle cx="3.5" cy="3.7" r="2.1" fill="{C['olive']}"/></svg><div>Elevação (folhas 03 a 05)</div></div>
-  <div class="small" style="margin-top:3mm">A linha colorida fica do lado revestido da parede. Faces externas: Pedra Moledo das fachadas da Sala.</div>
+  <div class="it"><svg width="7mm" height="4mm" viewBox="0 0 7 4" style="margin-right:2.4mm;flex:none"><rect x="0" y="0" width="7" height="1.6" fill="{C['ink']}"/><rect x="0" y="1.6" width="7" height="1" fill="#a88a5c" stroke="{C['ink']}" stroke-width="0.15"/></svg><div>Face revestida (faixa gráfica, fora de escala)</div></div>
+  <div class="it"><svg width="7mm" height="7mm" viewBox="0 0 7 7" style="margin-right:2.4mm;flex:none"><path d="M3.5,0.1 L5.1,2.2 L1.9,2.2Z" fill="{C['ink']}"/><circle cx="3.5" cy="4.3" r="2.5" fill="#fdfbf6" stroke="{C['ink']}" stroke-width="0.25"/><line x1="1.5" y1="4.3" x2="5.5" y2="4.3" stroke="{C['ink']}" stroke-width="0.18"/></svg><div>Elevação: código / folha</div></div>
   <div class="lbl" style="margin-top:7mm">Escala</div>
-  <div class="disp" style="font-size:21pt;margin-top:1.4mm">1/100</div>
-  {PR.escala_bar(100)}
+  <div class="disp" style="font-size:21pt;margin-top:1.4mm">1/75</div>
+  {PR.escala_bar(75)}
   <div class="small" style="margin-top:2.2mm;color:{C['olive2']}">Imprimir em A3 sem ajuste de escala.</div>
 </div>"""
-    rows = ''.join(f"<tr><td><span class='cb' style='background:{PROD[c]['linha']}'>{c}</span></td><td>{esc(PROD[c]['nome'].split(' — ')[0])}</td><td class='n'>{br(TOT[c])}</td></tr>" for c in PROD)
+    rows = ''.join(f"<tr><td style='padding:0.6mm 1.5mm'><span class='cb' style='background:{PROD[c]['linha']}'>{c}</span></td><td style='padding:0.6mm 1.5mm'>{esc(PROD[c]['nome'].split(' — ')[0])}</td><td class='n' style='padding:0.6mm 1.5mm'>{br(TOT[c])}</td></tr>" for c in PROD)
     idx = ''.join(f"<tr><td style='padding:0.5mm 1.5mm'><span class='cb ol' style='border-radius:1mm;height:4.4mm;min-width:6mm;font-size:4.4pt'>{e}</span></td><td style='padding:0.5mm 1.5mm;font-size:6.2pt'>{esc(t)}</td><td class='n' style='padding:0.5mm 1.5mm;font-size:6.2pt'>{f:02d}/{NF:02d}</td></tr>"
                   for e, (t, s, f) in ELEV.items())
     t1 = f"""
 <div class="abs" style="left:10mm;top:322mm;width:77mm">
   <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.6mm"><span class="ttl">Revestimentos</span><span style="font-size:5.6pt;color:{C['olive2']}">áreas líquidas em m²</span></div>
-  <table style="font-size:6pt">{rows.replace('<td>', "<td style='padding:0.6mm 1.5mm'>").replace("<td class='n'>", "<td class='n' style='padding:0.6mm 1.5mm'>")}
+  <table style="font-size:6pt">{rows}
   <tr class="tot"><td colspan="2" style="padding:0.8mm 1.5mm">Total</td><td class="n" style="padding:0.8mm 1.5mm">{br(sum(TOT.values()))}</td></tr></table>
 </div>
 <div class="abs" style="left:92mm;top:322mm;width:77mm">
@@ -205,7 +284,7 @@ def folha1():
 </div>"""
     return f"""<section class="sheet">
 <div class="abs" style="left:{left:.2f}mm;top:{top:.2f}mm">{svg}</div>{leg}{t1}
-{PR.carimbo(1, 'Planta de revestimentos de parede', '1/100', 321.7, 90.5)}</section>"""
+{PR.carimbo(1, 'Planta de revestimentos de parede', '1/75', 321.7, 90.5)}</section>"""
 
 
 # ============================================================= quadro (folha 02)
@@ -266,7 +345,7 @@ K = 20.0     # mm por metro (1/50)
 def pat_defs():
     return f"""<defs>
 <pattern id="t1" patternUnits="userSpaceOnUse" width="9" height="7"><rect width="9" height="7" fill="{PROD['RP01']['fill']}"/>
-<path d="M0.3,0.4 L4,0.2 L4.4,3 L0.6,3.4 Z M4.8,0.3 L8.6,0.6 L8.3,3.2 L4.9,3 Z M0.4,3.8 L3,3.7 L3.2,6.6 L0.3,6.7 Z M3.6,3.6 L8.5,3.7 L8.7,6.5 L3.7,6.6 Z" fill="#cfd6d0" stroke="#8f9a92" stroke-width="0.15"/></pattern>
+<path d="M0.3,0.4 L4,0.2 L4.4,3 L0.6,3.4 Z M4.8,0.3 L8.6,0.6 L8.3,3.2 L4.9,3 Z M0.4,3.8 L3,3.7 L3.2,6.6 L0.3,6.7 Z M3.6,3.6 L8.5,3.7 L8.7,6.5 L3.7,6.6 Z" fill="#e0d3b8" stroke="#a8997a" stroke-width="0.15"/></pattern>
 <pattern id="t2" patternUnits="userSpaceOnUse" width="4" height="4"><rect width="4" height="4" fill="{PROD['RP02']['fill']}"/><circle cx="1" cy="1" r="0.12" fill="#c9b894"/></pattern>
 <pattern id="t3" patternUnits="userSpaceOnUse" width="3" height="3"><rect width="3" height="3" fill="{PROD['RP03']['fill']}"/>
 <circle cx="0.7" cy="0.8" r="0.18" fill="#d9b44a"/><circle cx="2.2" cy="2.1" r="0.15" fill="#7fa6c9"/><circle cx="2.3" cy="0.6" r="0.12" fill="#d4789b"/></pattern>
@@ -414,6 +493,13 @@ def especificacao():
 </table>"""
 
 
+def ref(img, titulo, obs='', w=127):
+    o = f"<div style='font-size:5.8pt;color:{C['rust_t']};margin-top:0.6mm;line-height:1.35'>{esc(obs)}</div>" if obs else ''
+    return (f"<figure style='width:{w}mm;margin:0'><img src='imagens/{img}' style='width:{w}mm;display:block;border-radius:2.2mm'>"
+            f"<figcaption style='font-size:6pt;margin-top:1.2mm;color:{C['olive2']}'><b style='color:{C['ink']}'>Imagem de referência</b> · {esc(titulo)} "
+            f"— ilustrativa; valem as cotas e o quadro.{o}</figcaption></figure>")
+
+
 def folha3():
     e1 = elev_simple('F-S')
     e2 = elev_simple('F-L')
@@ -426,6 +512,7 @@ def folha3():
 {bloco('E03', e3, 'parede toda, PD 3,40 m (DWG)')}
 </div>
 <div class="abs" style="left:10mm;top:246mm;width:277mm">{especificacao()}</div>
+<div class="abs" style="left:158mm;top:148mm">{ref('ref_sala_tv.jpg', 'Sala TV', 'Observação: a imagem mostra Moledo nas faixas ao lado do painel de madeira; o quantitativo considera a parede toda, conforme informado.', 129)}</div>
 {nota_box([('RP01', 'Pedra Moledo, compra em pedreira: formato, espessura, assentamento e rejunte A CONFIRMAR.'),
            ('J01', 'Janela conforme Quadro de Esquadrias Rev. 01: 2,50 × 2,50 m, peitoril 0,50 m.'),
            ('E03', 'Largura pela geometria do DWG (3,60 m). A imagem de referência cota 3,75 m e 3,591 m de altura; adotado o PD de 3,40 m (informado).')], 3)}
@@ -482,6 +569,7 @@ def folha4():
 {nota_box([('Box', 'Planificado: lateral esquerda + fundo + lateral direita, vistos de dentro. Laterais: 0,90 m de Santorini (RP02).'),
            ('Nicho', 'Em toda a largura da parede da janela; no Banheiro Externo, no fundo do box. 0,30 × 0,10 m, base a 1,00 m.'),
            ('J04', 'Janela 1,00 × 0,60 m, peitoril 1,50 m (Quadro de Esquadrias Rev. 01).')], 4, extra)}
+<div class="abs" style="left:10mm;top:236mm;display:flex;gap:14mm">{ref('ref_wc_pink.jpg', 'WC 01 / WC 02', 'Divergência: a imagem mostra peças pequenas no Confete Pink; especificado 100 × 100 cm conforme o link informado — confirmar o formato.', 125)}{ref('ref_banheiro_externo.jpg', 'Banheiro Externo', 'Divergência: a imagem mostra porcelanato no fundo do box; especificado Fatto Oliva, conforme informado.', 125)}</div>
 {PR.carimbo(4, 'Elevações — Banheiros', '1/50', 332.0, 78.1)}
 </section>"""
 
@@ -508,6 +596,7 @@ def folha5():
 <h4 style="margin-top:0">Pendências</h4><ol style="columns:2;column-gap:6mm">{pend}</ol>
 <div class="small" style="position:absolute;left:7.5mm;right:7.5mm;bottom:4.5mm;display:flex;align-items:center;gap:4mm">
 <span class="lbl" style="font-size:6pt">Escala 1/50</span>{escala50()}</div></div>
+<div class="abs" style="left:104mm;top:250mm;display:flex;gap:7mm">{ref('ref_varanda.jpg', 'Varanda Gourmet', '', 88)}{ref('ref_lavanderia.jpg', 'Lavanderia', 'Divergência: a imagem mostra revestimento só entre bancada e armário; especificada a parede inteira, conforme informado.', 88)}</div>
 {PR.carimbo(5, 'Elevações — Cozinha, Lavanderia e Varanda', '1/50', 332.0, 78.1)}
 </section>"""
 

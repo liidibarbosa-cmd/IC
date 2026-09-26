@@ -7,8 +7,8 @@
    "esp": "A CONFIRMAR",
    "acab": "Natural (pedra)",
    "rejunte": "A CONFIRMAR",
-   "linha": "#3fa7d6",
-   "fill": "#dfe6e2"
+   "linha": "#7d6b4f",
+   "fill": "#ece3cf"
   },
   "RP02": {
    "nome": "Porcelanato Santorini OFW NAT",
@@ -17,7 +17,7 @@
    "esp": "7,0 mm",
    "acab": "Natural (NAT), retificado",
    "rejunte": "Corda · junta seca",
-   "linha": "#2c58a0",
+   "linha": "#a88a5c",
    "fill": "#ecdfc4"
   },
   "RP03": {
@@ -27,7 +27,7 @@
    "esp": "9,0 mm",
    "acab": "Natural, retificado",
    "rejunte": "A CONFIRMAR",
-   "linha": "#e3bf3c",
+   "linha": "#8f887a",
    "fill": "#f6f3ec"
   },
   "RP04": {
@@ -37,8 +37,8 @@
    "esp": "9,0 mm",
    "acab": "Natural, retificado",
    "rejunte": "Sugestão do fabricante: Quartzolit Preto Grafite, Rejuntabras Marfim ou Quartzobras Castor",
-   "linha": "#d64f8e",
-   "fill": "#f1d6dc"
+   "linha": "#b56f62",
+   "fill": "#e6c0b4"
   },
   "RP05": {
    "nome": "Revestimento Fatto Oliva AC",
@@ -47,7 +47,7 @@
    "esp": "A CONFIRMAR",
    "acab": "Acetinado (AC), V1",
    "rejunte": "A CONFIRMAR",
-   "linha": "#5f8d34",
+   "linha": "#6a6f42",
    "fill": "#b5b98c"
   },
   "RP06": {
@@ -57,7 +57,7 @@
    "esp": "A CONFIRMAR",
    "acab": "Rock face (bruto)",
    "rejunte": "A CONFIRMAR",
-   "linha": "#7a4aa3",
+   "linha": "#8c6d4a",
    "fill": "#e4d6bd"
   },
   "RP07": {
@@ -67,7 +67,7 @@
    "esp": "6,5 mm",
    "acab": "Acetinado, V1",
    "rejunte": "Junta 2 mm (fabricante) · cor A CONFIRMAR",
-   "linha": "#e0a01e",
+   "linha": "#5f6a70",
    "fill": "#fbfaf6"
   }
  },
