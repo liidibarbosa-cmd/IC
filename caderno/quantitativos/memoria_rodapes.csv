@@ -1,0 +1,133 @@
+﻿codigo;ambiente;tipo;descricao;x_ini;y_ini;x_fim;y_fim;comprimento_m;fonte
+R01;Quarto Casal;trecho de parede;inf.;9,941;36,386;14,591;36,386;4,650;geometria DWG (face interna)
+R01;Quarto Casal;trecho de parede;dir.;14,591;36,386;14,591;39,886;3,500;geometria DWG (face interna)
+R01;Quarto Casal;trecho de parede;sup.;14,591;39,886;9,941;39,886;4,650;geometria DWG (face interna)
+R01;Quarto Casal;trecho de parede;esq.;9,941;39,886;9,941;36,386;3,500;geometria DWG (face interna)
+R01;Quarto Casal;vão descontado;P06 (Circulação / Quarto Casal) no trecho inf.;10,091;36,311;10,991;36,311;-0,900;bloco de porta
+R01;Quarto Casal;vão descontado;P10 (Quarto Casal / Deck) no trecho dir.;14,666;36,711;14,666;39,411;-2,700;caixilho DWG (4 × 0,675)
+R01;Quarto Casal;vão descontado;P08 (Quarto Casal / Closet Casal) no trecho esq.;9,866;37,636;9,866;38,536;-0,900;soleira DWG
+R01;Quarto Casal;LÍQUIDO;16,30 − 4,50 = 11,80;;;;;11,800;
+R01;Closet Casal;trecho de parede;inf.;6,291;36,386;9,791;36,386;3,500;geometria DWG (face interna)
+R01;Closet Casal;trecho de parede;dir.;9,791;36,386;9,791;39,886;3,500;geometria DWG (face interna)
+R01;Closet Casal;trecho de parede;sup.;9,791;39,886;6,291;39,886;3,500;geometria DWG (face interna)
+R01;Closet Casal;trecho de parede;esq.;6,291;39,886;6,291;36,386;3,500;geometria DWG (face interna)
+R01;Closet Casal;vão descontado;P08 (Quarto Casal / Closet Casal) no trecho dir.;9,866;37,636;9,866;38,536;-0,900;soleira DWG
+R01;Closet Casal;vão descontado;P09 (Closet Casal / Banheiro Casal) no trecho esq.;6,216;37,636;6,216;38,536;-0,900;interrupção de parede
+R01;Closet Casal;LÍQUIDO;14,00 − 1,80 = 12,20;;;;;12,200;Trechos atrás de marcenaria: conferir com o projeto de marcenaria
+R01;Banheiro Casal;trecho de parede;inf.;4,191;36,386;6,141;36,386;1,950;geometria DWG (face interna)
+R01;Banheiro Casal;trecho de parede;dir.;6,141;36,386;6,141;39,886;3,500;geometria DWG (face interna)
+R01;Banheiro Casal;trecho de parede;sup.;6,141;39,886;4,191;39,886;1,950;geometria DWG (face interna)
+R01;Banheiro Casal;trecho de parede;esq.;4,191;39,886;4,191;36,386;3,500;geometria DWG (face interna)
+R01;Banheiro Casal;vão descontado;P09 (Closet Casal / Banheiro Casal) no trecho dir.;6,216;37,636;6,216;38,536;-0,900;interrupção de parede
+R01;Banheiro Casal;LÍQUIDO;10,90 − 0,90 = 10,00;;;;;10,000;
+R01;Quarto 02;trecho de parede;inf.;5,691;33,236;9,791;33,236;4,100;geometria DWG (face interna)
+R01;Quarto 02;trecho de parede;dir.;9,791;33,236;9,791;36,236;3,000;geometria DWG (face interna)
+R01;Quarto 02;trecho de parede;sup.;9,791;36,236;5,691;36,236;4,100;geometria DWG (face interna)
+R01;Quarto 02;trecho de parede;esq.;5,691;36,236;5,691;33,236;3,000;geometria DWG (face interna)
+R01;Quarto 02;vão descontado;P06 (Quarto 02 / WC 02) no trecho inf.;8,191;33,161;8,991;33,161;-0,800;bloco de porta
+R01;Quarto 02;vão descontado;P06 (Circulação / Quarto 02) no trecho dir.;9,866;33,336;9,866;34,136;-0,800;bloco de porta
+R01;Quarto 02;LÍQUIDO;14,20 − 1,60 = 12,60;;;;;12,600;
+R01;WC 02;trecho de parede;inf.;6,291;31,586;9,091;31,586;2,800;geometria DWG (face interna)
+R01;WC 02;trecho de parede;dir.;9,091;31,586;9,091;33,086;1,500;geometria DWG (face interna)
+R01;WC 02;trecho de parede;sup.;9,091;33,086;6,291;33,086;2,800;geometria DWG (face interna)
+R01;WC 02;trecho de parede;esq.;6,291;33,086;6,291;31,586;1,500;geometria DWG (face interna)
+R01;WC 02;vão descontado;P06 (Quarto 02 / WC 02) no trecho sup.;8,191;33,161;8,991;33,161;-0,800;bloco de porta
+R01;WC 02;LÍQUIDO;8,60 − 0,80 = 7,80;;;;;7,800;
+R01;WC 01;trecho de parede;inf.;6,291;29,936;9,091;29,936;2,800;geometria DWG (face interna)
+R01;WC 01;trecho de parede;dir.;9,091;29,936;9,091;31,436;1,500;geometria DWG (face interna)
+R01;WC 01;trecho de parede;sup.;9,091;31,436;6,291;31,436;2,800;geometria DWG (face interna)
+R01;WC 01;trecho de parede;esq.;6,291;31,436;6,291;29,936;1,500;geometria DWG (face interna)
+R01;WC 01;vão descontado;P06 (Quarto 01 / WC 01) no trecho inf.;8,191;29,861;8,991;29,861;-0,800;bloco de porta
+R01;WC 01;LÍQUIDO;8,60 − 0,80 = 7,80;;;;;7,800;
+R01;Quarto 01;trecho de parede;inf.;5,691;26,786;9,791;26,786;4,100;geometria DWG (face interna)
+R01;Quarto 01;trecho de parede;dir.;9,791;26,786;9,791;29,786;3,000;geometria DWG (face interna)
+R01;Quarto 01;trecho de parede;sup.;9,791;29,786;5,691;29,786;4,100;geometria DWG (face interna)
+R01;Quarto 01;trecho de parede;esq.;5,691;29,786;5,691;26,786;3,000;geometria DWG (face interna)
+R01;Quarto 01;vão descontado;P06 (Circulação / Quarto 01) no trecho dir.;9,866;28,886;9,866;29,686;-0,800;bloco de porta
+R01;Quarto 01;vão descontado;P06 (Quarto 01 / WC 01) no trecho sup.;8,191;29,861;8,991;29,861;-0,800;bloco de porta
+R01;Quarto 01;LÍQUIDO;14,20 − 1,60 = 12,60;;;;;12,600;
+R01;Escritório;trecho de parede;inf.;11,291;34,036;14,591;34,036;3,300;geometria DWG (face interna)
+R01;Escritório;trecho de parede;dir.;14,591;34,036;14,591;36,236;2,200;geometria DWG (face interna)
+R01;Escritório;trecho de parede;sup.;14,591;36,236;11,291;36,236;3,300;geometria DWG (face interna)
+R01;Escritório;trecho de parede;esq.;11,291;36,236;11,291;34,036;2,200;geometria DWG (face interna)
+R01;Escritório;vão descontado;P06 (Circulação / Escritório) no trecho esq.;11,216;34,136;11,216;34,936;-0,800;bloco de porta
+R01;Escritório;LÍQUIDO;11,00 − 0,80 = 10,20;;;;;10,200;
+R01;Banheiro Externo;trecho de parede;inf.;11,291;32,486;14,591;32,486;3,300;geometria DWG (face interna)
+R01;Banheiro Externo;trecho de parede;dir.;14,591;32,486;14,591;33,886;1,400;geometria DWG (face interna)
+R01;Banheiro Externo;trecho de parede;sup.;14,591;33,886;11,291;33,886;3,300;geometria DWG (face interna)
+R01;Banheiro Externo;trecho de parede;esq.;11,291;33,886;11,291;32,486;1,400;geometria DWG (face interna)
+R01;Banheiro Externo;vão descontado;P11 (Banheiro Externo / Deck) no trecho dir.;14,666;32,586;14,666;33,386;-0,800;bloco de porta
+R01;Banheiro Externo;LÍQUIDO;9,40 − 0,80 = 8,60;;;;;8,600;
+R01;Circulação Interna;trecho de parede;inf.;9,941;27,836;11,141;27,836;1,200;geometria DWG (face interna)
+R01;Circulação Interna;trecho de parede;dir.;11,141;27,836;11,141;36,236;8,400;geometria DWG (face interna)
+R01;Circulação Interna;trecho de parede;sup.;11,141;36,236;9,941;36,236;1,200;geometria DWG (face interna)
+R01;Circulação Interna;trecho de parede;esq. sup.;9,941;36,236;9,941;33,086;3,150;geometria DWG (face interna)
+R01;Circulação Interna;trecho de parede;nicho sup.;9,941;33,086;9,241;33,086;0,700;geometria DWG (face interna)
+R01;Circulação Interna;trecho de parede;nicho esq.;9,241;33,086;9,241;29,936;3,150;geometria DWG (face interna)
+R01;Circulação Interna;trecho de parede;nicho inf.;9,241;29,936;9,941;29,936;0,700;geometria DWG (face interna)
+R01;Circulação Interna;trecho de parede;esq. inf.;9,941;29,936;9,941;27,836;2,100;geometria DWG (face interna)
+R01;Circulação Interna;vão descontado;P06 (Circulação / Sala) no trecho inf.;10,041;27,761;10,941;27,761;-0,900;bloco de porta
+R01;Circulação Interna;vão descontado;P06 (Circulação / Escritório) no trecho dir.;11,216;34,136;11,216;34,936;-0,800;bloco de porta
+R01;Circulação Interna;vão descontado;P06 (Circulação / Quarto Casal) no trecho sup.;10,091;36,311;10,991;36,311;-0,900;bloco de porta
+R01;Circulação Interna;vão descontado;P06 (Circulação / Quarto 02) no trecho esq. sup.;9,866;33,336;9,866;34,136;-0,800;bloco de porta
+R01;Circulação Interna;vão descontado;P06 (Circulação / Quarto 01) no trecho esq. inf.;9,866;28,886;9,866;29,686;-0,800;bloco de porta
+R01;Circulação Interna;LÍQUIDO;20,60 − 4,20 = 16,40;;;;;16,400;Nicho (futura marcenaria) com piso e rodapé, conforme informado
+R01;Cozinha;trecho de parede;inf.;5,691;22,436;9,941;22,436;4,250;geometria DWG (face interna)
+R01;Cozinha;trecho de parede;dir.;9,941;22,436;9,941;26,636;4,200;geometria DWG (face interna)
+R01;Cozinha;trecho de parede;sup.;9,941;26,636;5,691;26,636;4,250;geometria DWG (face interna)
+R01;Cozinha;trecho de parede;esq.;5,691;26,636;5,691;22,436;4,200;geometria DWG (face interna)
+R01;Cozinha;vão descontado;P06 (Cozinha / Lavanderia) no trecho inf.;7,391;22,361;8,191;22,361;-0,800;interrupção de parede
+R01;Cozinha;vão descontado;P04 (Cozinha / Sala) no trecho dir.;9,941;22,436;9,941;26,636;-4,200;"informado (passagem; esquadria não desenhada no DWG)"
+R01;Cozinha;LÍQUIDO;16,90 − 5,00 = 11,90;;;;;11,900;
+R01;Lavanderia;trecho de parede;inf.;5,691;20,286;8,441;20,286;2,750;geometria DWG (face interna)
+R01;Lavanderia;trecho de parede;dir.;8,441;20,286;8,441;22,286;2,000;geometria DWG (face interna)
+R01;Lavanderia;trecho de parede;sup.;8,441;22,286;5,691;22,286;2,750;geometria DWG (face interna)
+R01;Lavanderia;trecho de parede;esq.;5,691;22,286;5,691;20,286;2,000;geometria DWG (face interna)
+R01;Lavanderia;vão descontado;P06 (Cozinha / Lavanderia) no trecho sup.;7,391;22,361;8,191;22,361;-0,800;interrupção de parede
+R01;Lavanderia;vão descontado;P06 (Lavanderia / Depósito) no trecho dir.;8,516;21,486;8,516;22,186;-0,700;bloco de porta
+R01;Lavanderia;vão descontado;P07 (Lavanderia / Corredor Lateral) no trecho esq.;5,616;20,386;5,616;22,186;-1,800;caixilho DWG
+R01;Lavanderia;LÍQUIDO;9,50 − 3,30 = 6,20;;;;;6,200;
+R01;Depósito;trecho de parede;inf.;8,591;20,286;9,791;20,286;1,200;geometria DWG (face interna)
+R01;Depósito;trecho de parede;dir.;9,791;20,286;9,791;22,286;2,000;geometria DWG (face interna)
+R01;Depósito;trecho de parede;sup.;9,791;22,286;8,591;22,286;1,200;geometria DWG (face interna)
+R01;Depósito;trecho de parede;esq.;8,591;22,286;8,591;20,286;2,000;geometria DWG (face interna)
+R01;Depósito;vão descontado;P06 (Lavanderia / Depósito) no trecho esq.;8,516;21,486;8,516;22,186;-0,700;bloco de porta
+R01;Depósito;LÍQUIDO;6,40 − 0,70 = 5,70;;;;;5,700;
+R01;Sala TV / Sala Jantar;trecho de parede;inf. esq.;9,941;20,286;11,591;20,286;1,650;geometria DWG (face interna)
+R01;Sala TV / Sala Jantar;trecho de parede;recuo;11,591;20,286;11,591;19,686;0,600;geometria DWG (face interna)
+R01;Sala TV / Sala Jantar;trecho de parede;inf. dir.;11,591;19,686;15,191;19,686;3,600;geometria DWG (face interna)
+R01;Sala TV / Sala Jantar;trecho de parede;dir.;15,191;19,686;15,191;27,686;8,000;geometria DWG (face interna)
+R01;Sala TV / Sala Jantar;trecho de parede;sup.;15,191;27,686;9,941;27,686;5,250;geometria DWG (face interna)
+R01;Sala TV / Sala Jantar;trecho de parede;esq.;9,941;27,686;9,941;20,286;7,400;geometria DWG (face interna)
+R01;Sala TV / Sala Jantar;vão descontado;P01 (Garagem / Sala) no trecho inf. esq.;10,094;20,211;11,294;20,211;-1,200;bloco de porta
+R01;Sala TV / Sala Jantar;vão descontado;P05 (Sala / Deck) no trecho dir.;15,266;24,436;15,266;27,436;-3,000;soleira DWG
+R01;Sala TV / Sala Jantar;vão descontado;P05 (Sala / Varanda Gourmet) no trecho sup.;11,991;27,761;14,991;27,761;-3,000;soleira DWG
+R01;Sala TV / Sala Jantar;vão descontado;P06 (Circulação / Sala) no trecho sup.;10,041;27,761;10,941;27,761;-0,900;bloco de porta
+R01;Sala TV / Sala Jantar;vão descontado;P04 (Cozinha / Sala) no trecho esq.;9,941;22,436;9,941;26,636;-4,200;"informado (passagem; esquadria não desenhada no DWG)"
+R01;Sala TV / Sala Jantar;LÍQUIDO;26,50 − 12,30 = 14,20;;;;;14,200;J01 (peitoril 0,50) não descontada
+R01;Garagem;trecho de parede;esq.;4,191;15,036;4,191;20,136;5,100;geometria DWG (face interna)
+R01;Garagem;trecho de parede;sup.;4,191;20,136;11,441;20,136;7,250;geometria DWG (face interna)
+R01;Garagem;trecho de parede;pilar dir.;11,441;20,136;11,441;19,536;0,600;geometria DWG (face interna)
+R01;Garagem;trecho de parede;pilar inf.;11,441;19,536;11,591;19,536;0,150;geometria DWG (face interna)
+R01;Garagem;vão descontado;P02 (Garagem / Corredor Lateral) no trecho sup.;4,341;20,211;5,141;20,211;-0,800;bloco de porta
+R01;Garagem;vão descontado;P01 (Garagem / Sala) no trecho sup.;10,094;20,211;11,294;20,211;-1,200;bloco de porta
+R01;Garagem;LÍQUIDO;13,10 − 2,00 = 11,10;;;;;11,100;Frente (7,40) e lateral direita (4,50) abertas no DWG: sem rodapé
+R02;Varanda Gourmet;trecho de parede;inf.;11,291;27,836;15,341;27,836;4,050;geometria DWG (face interna)
+R02;Varanda Gourmet;trecho de parede;esq.;11,291;32,336;11,291;27,836;4,500;geometria DWG (face interna)
+R02;Varanda Gourmet;trecho de parede;sup.;14,741;32,336;11,291;32,336;3,450;geometria DWG (face interna)
+R02;Varanda Gourmet;vão descontado;P05 (Sala / Varanda Gourmet) no trecho inf.;11,991;27,761;14,991;27,761;-3,000;soleira DWG
+R02;Varanda Gourmet;LÍQUIDO;12,00 − 3,00 = 9,00;;;;;9,000;Lado direito aberto para o deck: sem rodapé
+R02;Deck (inclui faixas sob beiral);trecho de parede;fachada Q. Casal/Escr./B. Ext.;14,741;32,486;14,741;39,886;7,400;geometria DWG (face interna)
+R02;Deck (inclui faixas sob beiral);trecho de parede;muro sup.;14,741;39,886;15,941;39,886;1,200;geometria DWG (face interna)
+R02;Deck (inclui faixas sob beiral);trecho de parede;fachada Sala;15,341;24,205;15,341;27,836;3,631;geometria DWG (face interna)
+R02;Deck (inclui faixas sob beiral);trecho de parede;muro inf.;15,341;24,205;17,341;24,205;2,000;geometria DWG (face interna)
+R02;Deck (inclui faixas sob beiral);trecho de parede;portão P03 + batentes;17,341;24,205;17,341;22,905;1,300;geometria DWG (face interna)
+R02;Deck (inclui faixas sob beiral);trecho de parede;muro portão;17,341;22,905;18,633;22,905;1,292;geometria DWG (face interna)
+R02;Deck (inclui faixas sob beiral);trecho de parede;muro de divisa (diag.);18,633;22,905;23,528;33,436;11,613;geometria DWG (face interna)
+R02;Deck (inclui faixas sob beiral);vão descontado;P10 (Quarto Casal / Deck) no trecho fachada Q. Casal/Escr./B. Ext.;14,666;36,711;14,666;39,411;-2,700;caixilho DWG (4 × 0,675)
+R02;Deck (inclui faixas sob beiral);vão descontado;P11 (Banheiro Externo / Deck) no trecho fachada Q. Casal/Escr./B. Ext.;14,666;32,586;14,666;33,386;-0,800;bloco de porta
+R02;Deck (inclui faixas sob beiral);vão descontado;P05 (Sala / Deck) no trecho fachada Sala;15,266;24,436;15,266;27,436;-3,000;soleira DWG
+R02;Deck (inclui faixas sob beiral);vão descontado;P03 (Deck / Acesso externo) no trecho portão P03 + batentes;17,341;23,905;17,341;23,005;-0,900;bloco de porta
+R02;Deck (inclui faixas sob beiral);LÍQUIDO;28,44 − 7,40 = 21,04;;;;;21,036;Sem rodapé junto à piscina e às áreas verdes
+R01;TOTAL R01;;;;;;;159,100;
+R02;TOTAL R02;;;;;;;30,036;

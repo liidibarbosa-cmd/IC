@@ -1,3 +1,7 @@
 node_modules/
 *.pkl
 db.json
+db.json
+__pycache__/
+caderno/fonte/previa/folha_*.png
+node_modules/

@@ -1,0 +1,26 @@
+﻿codigo;ambiente;produto;fabricante;formato;acabamento;area_m2;area_geometria_dwg_m2;fonte_da_medida;controle
+P01;Quarto Casal + Closet Casal;Porcelanato Santorini Off White (padrão);A CONFIRMAR ¹;A CONFIRMAR ¹;A CONFIRMAR ¹;28,70;28,525;"Rótulo DWG Prefeitura ""SUÍTE MASTER A=28,70 m²"" = valor informado; geometria DWG 16,28 + 12,25 = 28,53 (maior valor adotado)";Arquivo + Informado
+P01;Banheiro Casal;Porcelanato Santorini Off White (padrão);A CONFIRMAR ¹;A CONFIRMAR ¹;A CONFIRMAR ¹;6,83;6,825;"Geometria DWG 1,95 × 3,50 = 6,83 (rótulo planta de piso 6,83); informado/Prefeitura 6,30 (maior valor adotado)";Arquivo
+P01;Quarto 01;Porcelanato Santorini Off White (padrão);A CONFIRMAR ¹;A CONFIRMAR ¹;A CONFIRMAR ¹;12,30;12,300;Geometria DWG 4,10 × 3,00 = rótulo 12,30 = informado;Arquivo + Informado
+P01;WC 01;Porcelanato Santorini Off White (padrão);A CONFIRMAR ¹;A CONFIRMAR ¹;A CONFIRMAR ¹;4,20;4,200;Geometria DWG 2,80 × 1,50 = rótulo 4,20 = informado;Arquivo + Informado
+P01;Quarto 02;Porcelanato Santorini Off White (padrão);A CONFIRMAR ¹;A CONFIRMAR ¹;A CONFIRMAR ¹;12,30;12,300;Geometria DWG 4,10 × 3,00 = rótulo 12,30 = informado;Arquivo + Informado
+P01;WC 02;Porcelanato Santorini Off White (padrão);A CONFIRMAR ¹;A CONFIRMAR ¹;A CONFIRMAR ¹;4,20;4,200;Geometria DWG 2,80 × 1,50 = rótulo 4,20 = informado;Arquivo + Informado
+P01;Escritório;Porcelanato Santorini Off White (padrão);A CONFIRMAR ¹;A CONFIRMAR ¹;A CONFIRMAR ¹;7,26;7,260;Geometria DWG 3,30 × 2,20 = rótulo 7,26 = informado;Arquivo + Informado
+P01;Banheiro Externo;Porcelanato Santorini Off White (padrão);A CONFIRMAR ¹;A CONFIRMAR ¹;A CONFIRMAR ¹;4,62;4,620;"Geometria DWG 3,30 × 1,40 = rótulo 4,62; informado/Prefeitura 4,27 (maior valor adotado)";Arquivo
+P01;Circulação Interna (inclui nicho de marcenaria);Porcelanato Santorini Off White (padrão);A CONFIRMAR ¹;A CONFIRMAR ¹;A CONFIRMAR ¹;12,85;12,285;"Rótulo DWG planta de piso/forro ""CIRCULAÇÃO 12,85 m²""; geometria 1,20 × 8,40 + nicho 0,70 × 3,15 = 12,29; informado 10,08 (maior valor adotado)";Arquivo + Obra
+P01;Cozinha;Porcelanato Santorini Off White (padrão);A CONFIRMAR ¹;A CONFIRMAR ¹;A CONFIRMAR ¹;17,85;17,850;Geometria DWG 4,25 × 4,20 = rótulo 17,85 = informado;Arquivo + Informado
+P01;Sala TV / Sala Jantar (integradas);Porcelanato Santorini Off White (padrão);A CONFIRMAR ¹;A CONFIRMAR ¹;A CONFIRMAR ¹;41,01;41,010;Geometria DWG 5,25 × 8,00 − 1,65 × 0,60 = 41,01 = informado (Jantar 21,00 + Estar 20,01);Arquivo + Informado
+P01;Lavanderia;Porcelanato Santorini Off White (padrão);A CONFIRMAR ¹;A CONFIRMAR ¹;A CONFIRMAR ¹;5,50;5,500;Geometria DWG 2,75 × 2,00 = rótulo 5,50 = informado;Arquivo + Informado
+P01;Depósito;Porcelanato Santorini Off White (padrão);A CONFIRMAR ¹;A CONFIRMAR ¹;A CONFIRMAR ¹;2,40;2,400;Geometria DWG 1,20 × 2,00 = rótulo 2,40 = informado;Arquivo + Informado
+P01;Garagem;Porcelanato Santorini Off White (padrão);A CONFIRMAR ¹;A CONFIRMAR ¹;A CONFIRMAR ¹;37,65;37,650;"Geometria DWG 7,40 × 5,10 − 0,15 × 0,60 = 37,65 (= rótulo planta de forro); informado/Prefeitura 36,97 (maior valor adotado)";Arquivo
+P02;Varanda Gourmet;Porcelanato Santorini Off White HARD;Portinari;90 × 90 cm;HARD (áreas externas);18,32;18,315;"Contorno da hachura DWG 4,05 × 4,50 + 0,60 × 0,15 = 18,32; informado/Prefeitura 18,22 (maior valor adotado)";Arquivo
+P02;Deck (inclui faixas sob beiral);Porcelanato Santorini Off White HARD;Portinari;90 × 90 cm;HARD (áreas externas);77,69;77,688;"Hachura DWG 61,37 + giro P03 0,64 + faixas sob beiral 1,00 × 7,40 e 1,00 × 8,28 (beiral: DWG Prefeitura, ""PROJEÇÃO DO BEIRAL"")";Arquivo + Informado + Obra
+PP01;Rampa de acesso à garagem;Pedra portuguesa branca;—;A CONFIRMAR;A CONFIRMAR;37,00;34,606;"Informado: 7,40 × 5,00 com margem; geometria DWG com borda curva = 34,61 (maior valor adotado)";Informado
+PP01;Acesso externo lateral (até P03);Pedra portuguesa branca;—;A CONFIRMAR;A CONFIRMAR;15,03;15,027;Hachura GRASS do DWG (pedra portuguesa) fora da rampa e das áreas verdes;Arquivo + Obra
+PP01;Calçada — faixas de acesso e livre (2,35 m);Pedra portuguesa branca;—;A CONFIRMAR;A CONFIRMAR;98,07;98,068;"Geometria DWG: divisa frontal 40,32 m × faixas 1,25 + 1,10; término na Av. 3 não fechado no DWG";Arquivo + Obra
+NE;Corredor Lateral;Piso NÃO DEFINIDO;A CONFIRMAR;A CONFIRMAR;A CONFIRMAR;23,93;23,422;"Informado: 1,50 × 15,95 (aprox.); contorno da hachura DWG = 23,42 (maior valor adotado)";Informado + Obra
+P01;SUBTOTAL Porcelanato Santorini Off White (padrão);;;;;197,67;;;
+P02;SUBTOTAL Porcelanato Santorini Off White HARD;;;;;96,01;;;
+PP01;SUBTOTAL Pedra portuguesa branca;;;;;150,10;;;
+NE;SUBTOTAL Piso NÃO DEFINIDO;;;;;23,93;;;
+;TOTAL GERAL ESPECIFICADO (P01 + P02 + PP01);;;;;443,78;;;
