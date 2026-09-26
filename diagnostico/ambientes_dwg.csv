@@ -1,0 +1,23 @@
+id;nome_dwg;nome_provavel_caderno;dimensoes_face_interna_m;area_geometria_m2;area_rotulo_dwg_m2;perimetro_bruto_m;origem;situacao
+A01;BANHO SUITE MASTER;Banheiro Casal (WC Casal);1,95 x 3,50;6,825;6,83;10,90;DWG polilinha 001 #2651E3 + cotas;confirmado no arquivo
+A02;CLOSET;Closet Casal;3,50 x 3,50;12,250;12,25;14,00;DWG polilinha 001 #2651EF + cotas;confirmado no arquivo
+A03;SUITE MASTER;Quarto Casal;4,65 x 3,50;16,275;15,75;16,30;DWG polilinha 001 #2651F0 + cotas;DIVERGENCIA area rotulo x geometria
+A04;SUITE 2;Quarto 01 ou 02 (A CONFIRMAR);4,10 x 3,00;12,300;12,30;14,20;DWG polilinha 001 #2651EE + cotas;confirmado no arquivo
+A05;BANHO SUITE 2;WC 01 ou 02 (A CONFIRMAR);2,80 x 1,50;4,200;4,20;8,60;DWG polilinha 001 #2651E0 + cotas;confirmado no arquivo
+A06;BANHO SUITE 1;WC 01 ou 02 (A CONFIRMAR);2,80 x 1,50;4,200;4,20;8,60;DWG polilinha 001 #2651DF + cotas;confirmado no arquivo
+A07;SUITE 1;Quarto 01 ou 02 (A CONFIRMAR);4,10 x 3,00;12,300;12,30;14,20;DWG polilinha 001 #2651EB + cotas;confirmado no arquivo
+A08;HOME OFFICE;Escritorio;3,30 x 2,20;7,260;7,26;11,00;DWG polilinha 001 #2651ED + cotas;confirmado no arquivo
+A09;BANHO 4;Banheiro Externo;3,30 x 1,40;4,620;4,62;9,40;DWG polilinha 001 #2651E1 + cotas;confirmado no arquivo
+A10;CIRCULACAO;Corredor;1,20 x 8,40;10,080;12,85;19,20;DWG polilinha 001 #2651EC + cotas;DIVERGENCIA area rotulo x geometria
+A10n;NICHO junto a circulacao;(A CONFIRMAR);0,70 x 3,15;2,205;-;7,70;DWG linhas 04 + cotas 0,70/3,15;A CONFIRMAR se integra o corredor
+A11;COZINHA;Cozinha;4,25 x 4,20;17,850;17,85;16,90;DWG polilinha 001 #2651E8 + cotas;confirmado; lado 4,20 junto a sala sem parede no DWG
+A12;A.S.;Lavanderia;2,75 x 2,00;5,500;5,50;9,50;DWG polilinha 001 #2651E9 + cotas;confirmado no arquivo
+A13;DESPENSA;Deposito;1,20 x 2,00;2,400;2,40;6,40;DWG polilinha 001 #2651EA + cotas;confirmado no arquivo
+A14;ESTAR/JANTAR;Sala TV + Sala Jantar;5,25 x 8,00 - 1,65 x 0,60;41,010;41;26,50;DWG contorno de hachura 001 #265E96 + cotas 8,00/5,25/7,40/1,65/0,60/3,60;confirmado; divisao Sala TV/Jantar A CONFIRMAR
+E01;GARAGEM;Garagem;7,40 x 5,10 - 0,15 x 0,60;37,650;37,65 (forro) / 36,97 (prefeitura);25,00;DWG contorno de hachura 001 #266280;frente aberta; DIVERGENCIA entre plantas do DWG
+E02;VARANDA COB. LEVE;Area gourmet (A CONFIRMAR);4,05 x 4,50;18,225;18,22 (prefeitura);17,10;DWG contorno de hachura 001 #266280;confirmado no arquivo
+E03;AREA EXTERNA PISCINA (deck?);Deck (A CONFIRMAR);poligonal;62,008;-;-;DWG hachura 001 #266280 laco 1 (61,372) + setor de giro P03 (0,636);PENDENTE conferencia do limite do deck
+E04;CIRCULACAO EXTERNA / corredor lateral;Corredor lateral;poligonal (1,35 a 1,95 de largura);23,422;-;35,80;DWG hachura AR-HBONE #2660B4;piso NAO definido
+E05;RAMPA (frente da garagem);Rampa;poligonal com borda em arco r=12,142;34,606;-;23,73;DWG divisa #264F96 + linha ABERTURA y=15,036 + x=11,591;PENDENTE limite direito e material
+E06;PISCINA (espelho);-;3,80 x 6,00;22,800;22,80;19,60;DWG polilinha ALVENARIA #2650B9;confirmado no arquivo
+E07;CALCADA (passeio publico);-;faixa 2,50 (1,25+1,10+0,15);104,54 (termino nao fechado no DWG);-;-;DWG polilinhas #264F96/#264F97/#264F98/#264F99;PENDENTE termino na Av. 3

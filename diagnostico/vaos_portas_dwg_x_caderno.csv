@@ -1,0 +1,21 @@
+codigo_caderno;ambiente_caderno;vao_caderno_m;vao_medido_dwg_m;ambientes_dwg;origem_dwg;situacao
+P01;Garagem / Sala TV;1,20;1,20;Estar/Jantar - Garagem;bloco *U6 (folha 1,00 x escala 1,2) x=10,094..11,294;confere
+P02;Garagem / Corredor;0,90;0,80;Garagem - Corredor lateral;bloco *U5 x=4,341..5,141;DIVERGENTE
+P03;Acesso externo Gourmet;0,90;0,90;Area externa (portao lateral);bloco *U3 y=23,005..23,905;confere
+P04;Sala TV;4,20;sem esquadria no DWG;limite Cozinha/Estar (x=9,941; 4,20 de extensao, sem parede);-;A CONFIRMAR localizacao
+P05 (1);Sala Jantar;3,00;3,00;Estar/Jantar - Varanda (face norte);soleira 01 #264FDE x=11,991..14,991;confere
+P05 (2);Sala Jantar;3,00;3,00;Estar/Jantar - area externa (face leste);soleira 01 #26504C y=24,436..27,436;confere
+P06;Sala Jantar;0,90;0,90;Circulacao - Estar/Jantar;bloco *U7 x=10,041..10,941;confere
+P06;Cozinha;0,90;0,80;Cozinha - A.S. (vao sem folha desenhada);linhas 04 x=7,391..8,191;DIVERGENTE
+P06;Deposito;0,90;0,70;A.S. - Despensa;bloco *U8 y=21,486..22,186;DIVERGENTE
+P06;Quarto (Suite 1);0,90;0,80;Circulacao - Suite 1;bloco *U4 + soleira #2651D6;DIVERGENTE
+P06;WC (Banho Suite 1);0,90;0,80;Suite 1 - Banho Suite 1;bloco *U4 x=8,191..8,991;DIVERGENTE
+P06;Quarto (Suite 2);0,90;0,80;Circulacao - Suite 2;bloco *U4 + soleira #2651D7;DIVERGENTE
+P06;WC (Banho Suite 2);0,90;0,80;Suite 2 - Banho Suite 2;bloco *U4 x=8,191..8,991;DIVERGENTE
+P06;Quarto Casal;0,90;0,90;Circulacao - Suite Master;bloco *U3 + soleira #2651D9;confere
+P06;Escritorio;0,90;0,80;Circulacao - Home Office;bloco *U4 + soleira #2651D8;DIVERGENTE
+P07;Lavanderia;1,80;1,80;A.S. - Corredor lateral;caixilho 0,913+0,887 y=20,386..22,186;confere
+P08;Closet Casal;1,00;0,90;Suite Master - Closet;soleira 01 #2651DA y=37,636..38,536;DIVERGENTE
+P09;Banheiro Casal;1,00;0,90;Closet - Banho Suite Master;linhas 04 y=37,636..38,536;DIVERGENTE
+P10;Quarto Casal;2,50;2,70;Suite Master - area externa;caixilho 4 x 0,675 y=36,711..39,411;DIVERGENTE
+P11;Banheiro Externo;0,90;0,80 (vao total 1,25);Banho 4 - area externa;bloco *U5 + soleira 1,25 #265163;DIVERGENTE
