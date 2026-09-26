@@ -348,12 +348,11 @@ TRANS = [
     ('T07', 'P03', 'Deck (P02) / Acesso externo (PP01)', SOL_MARMORE + ' (0,90 m).', 'Informado', 0.90),
     ('T08', '—', 'Garagem (P01) / Rampa (PP01) — frente aberta', SOL_MARMORE + ' (7,40 m, linha y = 15,036).', 'Informado', 7.40),
     ('T09', '—', 'Garagem (P01) / Acesso externo (PP01) — lateral aberta', SOL_MARMORE + ' (4,50 m).', 'Informado', 4.50),
-    ('T10', '—', 'Varanda Gourmet (P02) / Deck (P02)', 'Mesmo material, sem desnível documentado: sem soleira. Havendo desnível: ' + PERFIL.lower() + '.', 'Informado', None),
-    ('T11', '—', 'Deck (P02) / Piscina', 'Borda da piscina e arremate não documentados: A CONFIRMAR.', 'Decisão', None),
-    ('T12', '—', 'Deck (P02) e PP01 / áreas verdes', 'Contenção/arremate entre piso e jardim não documentado: A CONFIRMAR.', 'Decisão', None),
-    ('T13', '—', 'Rampa (PP01) / Calçada (PP01) — divisa', 'Mesmo material: sem soleira. Havendo desnível: ' + PERFIL.lower() + '.', 'Informado', None),
-    ('T14', 'P04', 'Cozinha (P01) / Sala TV / Sala Jantar (P01)', 'Mesmo material: sem soleira. Havendo desnível: ' + PERFIL.lower() + '. Posição do trilho de P04 A CONFIRMAR.', 'Informado', None),
-    ('T15', 'P06/P08/P09', 'Portas internas (P01 / P01)', 'Mesmo material: sem soleira. Havendo desnível: ' + PERFIL.lower() + '.', 'Informado', None),
+    ('T10', '—', 'Deck (P02) / Piscina', 'Borda da piscina e arremate não documentados: A CONFIRMAR.', 'Decisão', None),
+    ('T11', '—', 'Deck (P02) e PP01 / áreas verdes', 'Contenção/arremate entre piso e jardim não documentado: A CONFIRMAR.', 'Decisão', None),
+    ('T12', '—', 'Rampa (PP01) / Calçada (PP01) — divisa', 'Mesmo material: sem soleira. Havendo desnível: ' + PERFIL.lower() + '.', 'Informado', None),
+    ('T13', 'P04', 'Cozinha (P01) / Sala TV / Sala Jantar (P01)', 'Mesmo material: sem soleira. Havendo desnível: ' + PERFIL.lower() + '. Posição do trilho de P04 A CONFIRMAR.', 'Informado', None),
+    ('T14', 'P06/P08/P09', 'Portas internas (P01 / P01)', 'Mesmo material: sem soleira. Havendo desnível: ' + PERFIL.lower() + '.', 'Informado', None),
 ]
 SOLEIRAS = [dict(t=t[0], porta=t[1], encontro=t[2], comp=t[5]) for t in TRANS if t[5]]
 

@@ -6912,21 +6912,13 @@
   [
    "T10",
    "—",
-   "Varanda Gourmet (P02) / Deck (P02)",
-   "Mesmo material, sem desnível documentado: sem soleira. Havendo desnível: perfil metálico (mesmo material, somente com desnível).",
-   "Informado",
-   null
-  ],
-  [
-   "T11",
-   "—",
    "Deck (P02) / Piscina",
    "Borda da piscina e arremate não documentados: A CONFIRMAR.",
    "Decisão",
    null
   ],
   [
-   "T12",
+   "T11",
    "—",
    "Deck (P02) e PP01 / áreas verdes",
    "Contenção/arremate entre piso e jardim não documentado: A CONFIRMAR.",
@@ -6934,7 +6926,7 @@
    null
   ],
   [
-   "T13",
+   "T12",
    "—",
    "Rampa (PP01) / Calçada (PP01) — divisa",
    "Mesmo material: sem soleira. Havendo desnível: perfil metálico (mesmo material, somente com desnível).",
@@ -6942,7 +6934,7 @@
    null
   ],
   [
-   "T14",
+   "T13",
    "P04",
    "Cozinha (P01) / Sala TV / Sala Jantar (P01)",
    "Mesmo material: sem soleira. Havendo desnível: perfil metálico (mesmo material, somente com desnível). Posição do trilho de P04 A CONFIRMAR.",
@@ -6950,7 +6942,7 @@
    null
   ],
   [
-   "T15",
+   "T14",
    "P06/P08/P09",
    "Portas internas (P01 / P01)",
    "Mesmo material: sem soleira. Havendo desnível: perfil metálico (mesmo material, somente com desnível).",

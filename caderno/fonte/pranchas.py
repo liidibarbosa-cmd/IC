@@ -4,6 +4,7 @@ Plantas em SVG com escala real: largura em mm = extensão (m) x 1000 / escala.
 Imprimir o PDF em A3 sem ajuste de escala.
 """
 import json, math, os, html
+from decimal import Decimal, ROUND_HALF_UP
 from shapely.geometry import Polygon, LineString, Point
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
@@ -13,10 +14,10 @@ Z = D['zonas']
 DATA = '26/09/2026'
 REV = 'Nº 00'
 CADERNO = 'CADERNO DE DETALHAMENTO DE REVESTIMENTO DE PISO 01/02'
-NF = 5
+NF = 6
 
 C = dict(bg='#f7f2e8', ink='#22251a', rust='#903f2a', rust_t='#7a3423', olive='#3f422f', olive2='#4f5439',
-         band='#ece4d4', cream='#f5e7c4', line='#d8cfbc',
+         band='#ece4d4', cream='#f5e7c4', line='#d8cfbc', porta='#fdfbf6',
          P01='#e9d6ae', P02='#c7c6a9', PP01='#f4f2ec', NE='#f7f2e8', verde='#cdd5ae', agua='#c5d6d4')
 esc = lambda s: html.escape(str(s))
 br = lambda v, n=2: f'{v:.{n}f}'.replace('.', ',')
@@ -129,16 +130,28 @@ def base(pl, tint=1.0, calcada=True):
         pl.line(G['meiofio'], C['ink'], 0.18)
     lote = G['lote'] + [G['lote'][0]]
     pl.line(lote, C['olive2'], 0.18, dash=(3.0, 0.8, 0.5, 0.8))
-    # esquadrias, portas e soleiras
-    for L in G['linhas']['soleiras']:
-        pl.line(L, C['ink'], 0.08)
+    # paredes (faces do DWG poligonizadas)
+    for w in G['paredes']:
+        pl.poly(w, fill=C['ink'], stroke=C['ink'], sw=0.05)
+    # vão das portas: faixa clara na espessura da parede (as linhas de soleira do DWG fechavam o vão)
+    for vid, v in D['vaos'].items():
+        if vid == 'P04':          # passagem sem parede no DWG
+            continue
+        a, b = v['a'], v['b']
+        if vid == 'P03':          # coordenada do vão na face; eixo da parede em x = 17,266
+            a, b = (17.266, a[1]), (17.266, b[1])
+        faixa = LineString([a, b]).buffer(0.075, cap_style=2)
+        pts = [tuple(p) for p in faixa.exterior.coords][:-1]
+        pl.poly(pts, fill=C['porta'], stroke='none')
+        L = math.dist(a, b)
+        nx, ny = -(b[1] - a[1]) / L * 0.075, (b[0] - a[0]) / L * 0.075
+        for k in (1, -1):
+            pl.line([(a[0] + k * nx, a[1] + k * ny), (b[0] + k * nx, b[1] + k * ny)], C['ink'], 0.08)
+    # esquadrias e portas
     for L in G['linhas']['caixilhos']:
         pl.line(L, C['ink'], 0.13)
     for L in G['linhas']['portas']:
         pl.line(L, C['ink'], 0.1)
-    # paredes (faces do DWG poligonizadas)
-    for w in G['paredes']:
-        pl.poly(w, fill=C['ink'], stroke=C['ink'], sw=0.05)
 
 
 def rotulo(pl, p, nome, cod, area_txt, rot=0, size=5.3, cod_fill=C['olive'], sub=None):
@@ -184,7 +197,7 @@ def folha_pisos():
     for zid, (p, rot) in POS.items():
         z = Z[zid]
         if zid in ('QCA', 'CLO'):
-            a = 'ver quadro ²'
+            a = br(float(Decimal(str(z['area_geo'])).quantize(Decimal('0.01'), ROUND_HALF_UP))) + ' m² ²'
         else:
             a = br(AREA[zid]) + ' m²'
         nome = nomes.get(zid, z['nome'])
@@ -228,8 +241,8 @@ def soleiras(pl):
 
 TPOS = {'T01': (4.74, 20.21), 'T02': (5.616, 21.29), 'T03': (13.49, 27.76), 'T04': (15.266, 25.94),
         'T05': (14.666, 38.06), 'T06': (14.666, 32.99), 'T07': (17.341, 23.455), 'T08': (7.8, 15.036),
-        'T09': (11.591, 17.3), 'T10': (15.341, 30.1), 'T11': (19.84, 32.886), 'T12': (22.241, 36.2),
-        'T13': (5.47, 10.036), 'T14': (9.941, 24.536)}
+        'T09': (11.591, 17.3), 'T10': (19.84, 32.886), 'T11': (22.241, 36.2),
+        'T12': (5.47, 10.036), 'T13': (9.941, 24.536)}
 
 
 # ----------------------------------------------------------- planta de rodapés
@@ -438,14 +451,15 @@ def folha1():
   <div class="it"><div class="sw" style="background:repeating-linear-gradient(45deg,{C['bg']} 0 0.8mm,{C['rust']} 0.8mm 0.95mm)"></div><div>A definir: P02 ou PI01 (intertravado drenante)</div></div>
   <div class="it"><div class="sw" style="background:{C['verde']}"></div><div>Área verde (sem piso)</div></div>
   <div class="it"><div class="sw" style="background:{C['agua']}"></div><div>Piscina</div></div>
-  <div class="it"><svg width="7mm" height="5mm" viewBox="0 0 7 5" style="margin-right:2.4mm;flex:none"><path d="M3.5,0 L6,2.5 L3.5,5 L1,2.5Z" fill="{C['olive2']}"/></svg><div>Transição de piso (folha 05/05)</div></div>
-  <div class="it"><svg width="7mm" height="3mm" viewBox="0 0 7 3" style="margin-right:2.4mm;flex:none"><line x1="0" y1="1.5" x2="7" y2="1.5" stroke="#8d8475" stroke-width="1.25"/><line x1="0" y1="1.5" x2="7" y2="1.5" stroke="#f1ede4" stroke-width="0.75"/></svg><div>Soleira mármore Itaúnas, baguete 5 cm</div></div>
+  <div class="it"><svg width="7mm" height="5mm" viewBox="0 0 7 5" style="margin-right:2.4mm;flex:none"><path d="M3.5,0 L6,2.5 L3.5,5 L1,2.5Z" fill="{C['olive2']}"/></svg><div>Transição de piso (folha 05/{NF:02d})</div></div>
+  <div class="it"><svg width="7mm" height="3mm" viewBox="0 0 7 3" style="margin-right:2.4mm;flex:none"><line x1="0" y1="1.5" x2="7" y2="1.5" stroke="#8d8475" stroke-width="1.25"/><line x1="0" y1="1.5" x2="7" y2="1.5" stroke="#f1ede4" stroke-width="0.75"/></svg><div>Soleira mármore Itaúnas, baguete 5 cm (detalhe D3)</div></div>
+  <div class="it"><div class="sw" style="background:{C['porta']};border:0.25mm solid {C['ink']};height:2.2mm"></div><div>Vão de porta</div></div>
   <div class="it"><svg width="7mm" height="3mm" viewBox="0 0 7 3" style="margin-right:2.4mm;flex:none"><line x1="0" y1="1.5" x2="7" y2="1.5" stroke="{C['olive2']}" stroke-width="0.25" stroke-dasharray="3 .8 .5 .8"/></svg><div>Divisa do lote</div></div>
   <div class="lbl" style="margin-top:7mm">Escala</div>
   <div class="disp" style="font-size:21pt;margin-top:1.4mm">1/125</div>
   {escala_bar(125)}
   <div class="small" style="margin-top:2.2mm;color:{C['olive2']}">Imprimir em A3 sem ajuste de escala.</div>
-  <div class="small" style="margin-top:6mm">² Quarto Casal + Closet Casal: 28,70 m² no conjunto.</div>
+  <div class="small" style="margin-top:6mm">² Quarto Casal e Closet Casal pela geometria do DWG (16,28 + 12,25 = 28,53 m²). No quadro, o conjunto adota 28,70 m² (maior valor, Prefeitura).</div>
 </div>"""
     rows = ''.join(f"""<tr><td><span class="cb {'ne' if c == 'NE' else 'ol'}">{'—' if c == 'NE' else c}</span></td><td>{esc(P[c]['produto'] if c != 'NE' else 'Corredor Lateral Externo — P02 ou PI01 (a definir)')}</td><td class="n">{br(sub[c])}</td></tr>"""
                    for c in ('P01', 'P02', 'PP01', 'NE'))
@@ -463,7 +477,7 @@ def folha1():
   <tr><td><span class="cb">R01</span></td><td>Santorini OFW NAT — mesmo piso P01</td><td class="n">{br(R['R01'])}</td></tr>
   <tr><td><span class="cb gr">R02</span></td><td>Santorini SGR HARD — mesmo piso P02</td><td class="n">{br(R['R02'])}</td></tr>
   <tr class="tot"><td colspan="2">Total</td><td class="n">{br(R['R01'] + R['R02'])}</td></tr></table>
-  <div style="font-size:5.6pt;color:{C['olive2']};margin-top:1.4mm;line-height:1.4">Trechos e memória de cálculo nas folhas 03/05 e 04/05. Sem rodapé em PP01 e no Corredor Lateral Externo.</div>
+  <div style="font-size:5.6pt;color:{C['olive2']};margin-top:1.4mm;line-height:1.4">Trechos e memória de cálculo nas folhas 03/{NF:02d} e 04/{NF:02d}. Sem rodapé em PP01 e no Corredor Lateral Externo.</div>
 </div>"""
     return f"""<section class="sheet">
 <div class="abs" style="left:{left:.2f}mm;top:{top:.2f}mm">{svg}</div>{leg}{t1}
@@ -681,6 +695,7 @@ def folha5():
 <li><b class="nn">1</b><span>Mesmo produto/material, apenas com mudança de nível: perfil metálico.</span></li>
 <li><b class="nn">2</b><span>Troca de material: soleira de mármore Itaúnas, tipo baguete, com 5 cm de profundidade pelo comprimento do vão.</span></li>
 <li><b class="nn">3</b><span>Níveis não documentados neste caderno. Onde houver desnível entre pisos iguais, aplicar o critério 1.</span></li>
+<li><b class="nn">4</b><span>Detalhes ilustrativos: perfil metálico (D2), soleira baguete (D3) e trilho embutido (D4) na folha 06/{NF:02d}.</span></li>
 </ol>
 <h4>Observações</h4><ol>
 <li><b class="nn">·</b><span>Paginação de piso não faz parte deste caderno. Revestimentos de parede: Caderno 02/02.</span></li>
@@ -691,10 +706,34 @@ def folha5():
 </section>"""
 
 
+def folha6():
+    import detalhes
+    cards = ''
+    for cod, tit, sub, fn in detalhes.CARDS:
+        cards += (f"<div style='background:#fbf8f1;border-radius:4mm;padding:4mm 4mm 2mm 4mm;border:0.25mm solid {C['line']}'>"
+                  f"<div style='display:flex;align-items:center;gap:2.4mm'><span class='cb ol' style='border-radius:1mm'>{cod}</span>"
+                  f"<span class='ttl' style='font-size:12pt'>{esc(tit)}</span></div>"
+                  f"<div style='font-size:5.8pt;color:{C['olive2']};margin:0.8mm 0 1.5mm 8mm;letter-spacing:0.3pt'>{esc(sub)}</div>{fn()}</div>")
+    return f"""<section class="sheet">
+<div class="abs head" style="left:10mm;top:10mm"><div class="lbl">Pisos e rodapés · Revisão 00</div><h1>Detalhes de rodapé e transições</h1></div>
+<div class="abs" style="left:10mm;top:35mm;width:277mm;display:grid;grid-template-columns:1fr 1fr;gap:6mm">{cards}</div>
+<div class="normas notes" style="top:332mm;height:78.1mm;padding-top:4.5mm">
+<h4 style="margin-top:0">Onde se aplica</h4><ol>
+<li><b class="nn">D1</b><span>Todos os rodapés R01 e R02 (folhas 03/{NF:02d} e 04/{NF:02d}).</span></li>
+<li><b class="nn">D2</b><span>Encontros do mesmo material com desnível (critério 1 da folha 05/{NF:02d}). Níveis não documentados neste caderno.</span></li>
+<li><b class="nn">D3</b><span>Trocas de material T01 a T09 — 24,90 m de soleira (folha 05/{NF:02d}).</span></li>
+<li><b class="nn">D4</b><span>Portas de correr P04, P05 e P07; P10 A CONFIRMAR. Nas portas externas, compatibilizar o trilho com a soleira D3.</span></li>
+</ol>
+<div class="small" style="position:absolute;left:7.5mm;right:7.5mm;bottom:5.5mm;color:{C['olive2']}">Desenhos ilustrativos, sem escala. Cotas indicadas: rodapé 8 cm e soleira 5 cm (informados); espessuras do porcelanato conforme o fabricante. Demais dimensões: A CONFIRMAR.</div>
+</div>
+{carimbo(6, 'Detalhes de rodapé e transições', 'Sem escala', 332.0, 78.1)}
+</section>"""
+
+
 def main():
     doc = f"""<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>{esc(CADERNO)} — Rev. 00</title>
 <style>{fonts_css()}{CSS}</style></head><body>
-{folha1()}{folha2()}{folha3()}{folha4()}{folha5()}
+{folha1()}{folha2()}{folha3()}{folha4()}{folha5()}{folha6()}
 </body></html>"""
     open(os.path.join(AQUI, 'caderno.html'), 'w').write(doc)
     print('ok', DELTA_CAD)

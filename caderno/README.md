@@ -4,18 +4,19 @@ Residência Ivan e Carol · Nova Odessa, SP · 26/09/2026
 ## Entregáveis
 | Arquivo | Conteúdo |
 |---|---|
-| `CADERNO DE DETALHAMENTO DE REVESTIMENTO DE PISO 01-02 - R00.pdf` | 5 folhas A3 (297 × 420 mm). Imprimir sem ajuste de escala. |
+| `CADERNO DE DETALHAMENTO DE REVESTIMENTO DE PISO 01-02 - R00.pdf` | 6 folhas A3 (297 × 420 mm). Imprimir sem ajuste de escala. |
 | `quantitativos/QUANTITATIVOS PISOS E RODAPES - R00.xlsx` | Pisos, memória de rodapés (trecho a trecho, com fórmulas), vãos e transições. |
 | `quantitativos/quadro_pisos.csv`, `quantitativos/memoria_rodapes.csv` | Os mesmos dados em CSV (`;`, UTF-8). |
 | `fonte/` | Arquivos-fonte editáveis que geram o PDF. |
 | `fonte/previa/pdf_XX.png` | Renderização de cada folha do PDF (110 dpi). |
 
 Folhas:
-- 01/05 — planta de especificação de pisos (1/125)
-- 02/05 — quadro de pisos
-- 03/05 — planta de rodapés (1/100)
-- 04/05 — memória de cálculo dos rodapés
-- 05/05 — transições e pendências
+- 01/06 — planta de especificação de pisos (1/125)
+- 02/06 — quadro de pisos
+- 03/06 — planta de rodapés (1/100)
+- 04/06 — memória de cálculo dos rodapés
+- 05/06 — transições e pendências
+- 06/06 — detalhes ilustrativos: rodapé, perfil metálico, soleira baguete e trilho embutido
 
 ## Como regenerar
 ```bash
