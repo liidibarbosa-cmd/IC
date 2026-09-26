@@ -21,27 +21,27 @@ def header(ws, cols, widths):
 
 # --- Pisos
 ws = wb.active; ws.title = 'Pisos'
-header(ws, ['Código', 'Ambiente', 'Produto', 'Fabricante', 'Formato', 'Acabamento', 'Área adotada (m²)', 'Área geometria DWG (m²)', 'Fonte da medida', 'Controle'],
-       [9, 42, 38, 14, 14, 20, 16, 18, 90, 40])
+header(ws, ['Código', 'Ambiente', 'Produto', 'Fabricante', 'Formato', 'Acabamento', 'Rejunte', 'Área adotada (m²)', 'Área geometria DWG (m²)', 'Memória da medida', 'Controle'],
+       [9, 42, 34, 16, 16, 20, 20, 16, 18, 90, 30])
 subs = {}
 for cod in ('P01', 'P02', 'PP01', 'NE'):
-    ws.append([cod, {'NE': 'PISO NÃO DEFINIDO — A CONFIRMAR'}.get(cod, D['produtos'][cod]['produto'].upper())])
+    ws.append([cod, {'NE': 'A DEFINIR — P02 OU PI01 (INTERTRAVADO DRENANTE)'}.get(cod, D['produtos'][cod]['produto'].upper())])
     for c in ws[ws.max_row]: c.fill = SEC; c.font = SF
     r0 = ws.max_row + 1
     for p in [x for x in D['pisos'] if x['cod'] == cod]:
         pr = D['produtos'][cod]
-        ws.append([cod, p['ambiente'], pr['produto'], pr['fabricante'], pr['formato'], pr['acabamento'], p['area'],
+        ws.append([cod, p['ambiente'], pr['produto'], pr['fabricante'], pr['formato'], pr['acabamento'], pr['rejunte'], p['area'],
                    round(sum(D['zonas'][z]['area_geo'] for z in p['zonas']), 3), p['fonte'], ' + '.join(p['controle'])])
     r1 = ws.max_row
-    ws.append(['', f'Subtotal {cod}', '', '', '', '', f'=SUM(G{r0}:G{r1})'])
+    ws.append(['', f'Subtotal {cod}', '', '', '', '', '', f'=SUM(H{r0}:H{r1})'])
     subs[cod] = ws.max_row
     for c in ws[ws.max_row]: c.fill = SUB; c.font = B
-ws.append(['', 'TOTAL GERAL ESPECIFICADO (P01 + P02 + PP01)', '', '', '', '', f"=G{subs['P01']}+G{subs['P02']}+G{subs['PP01']}"])
+ws.append(['', 'TOTAL GERAL (P01 + P02 + PP01 + a definir)', '', '', '', '', '', f"=H{subs['P01']}+H{subs['P02']}+H{subs['PP01']}+H{subs['NE']}"])
 for c in ws[ws.max_row]: c.font = B
 for row in ws.iter_rows(min_row=2):
     for c in row:
         c.border = thin; c.alignment = Alignment(vertical='top', wrap_text=True)
-    row[6].number_format = '0.00'; row[7].number_format = '0.000'
+    row[7].number_format = '0.00'; row[8].number_format = '0.000'
 
 # --- Rodapés (memória)
 ws = wb.create_sheet('Rodapés - memória')
@@ -49,7 +49,7 @@ header(ws, ['Código', 'Ambiente', 'Tipo', 'Descrição', 'X início', 'Y iníci
        [9, 34, 18, 44, 10, 10, 10, 10, 16, 60])
 tot = {}
 for cod in ('R01', 'R02'):
-    ws.append([cod, {'R01': 'RODAPÉ SANTORINI OFF WHITE PADRÃO — h = 8 cm', 'R02': 'RODAPÉ SANTORINI OFF WHITE HARD — h = 8 cm'}[cod]])
+    ws.append([cod, {'R01': 'RODAPÉ PORCELANATO SANTORINI OFW NAT — h = 8 cm', 'R02': 'RODAPÉ PORCELANATO SANTORINI SGR HARD — h = 8 cm'}[cod]])
     for c in ws[ws.max_row]: c.fill = SEC; c.font = SF
     liq_rows = []
     for r in [x for x in D['rodapes'] if x['cod'] == cod]:
@@ -84,10 +84,27 @@ for vid, v in D['vaos'].items():
 
 # --- Transições
 ws = wb.create_sheet('Transições')
-header(ws, ['Código', 'Porta', 'Encontro de pisos', 'Situação / decisão', 'Controle'], [8, 12, 50, 80, 14])
+header(ws, ['Código', 'Porta', 'Encontro de pisos', 'Solução', 'Controle', 'Soleira mármore Itaúnas (m)'], [8, 12, 50, 80, 14, 16])
 for t in D['transicoes']:
     ws.append(list(t))
 for row in ws.iter_rows(min_row=2):
     for c in row: c.alignment = Alignment(vertical='top', wrap_text=True)
+# --- Soleiras
+ws = wb.create_sheet('Soleiras')
+header(ws, ['Transição', 'Porta', 'Encontro', 'Soleira', 'Comprimento (m)'], [10, 10, 55, 48, 16])
+r0 = ws.max_row + 1
+for so in D['soleiras']:
+    ws.append([so['t'], so['porta'], so['encontro'], 'Mármore Itaúnas, baguete 5 cm de profundidade', so['comp']])
+ws.append(['', '', 'TOTAL', '', f'=SUM(E{r0}:E{ws.max_row})'])
+for c in ws[ws.max_row]: c.font = B
+
+# --- Produtos
+ws = wb.create_sheet('Produtos')
+header(ws, ['Código', 'Item', 'Especificação'], [10, 16, 110])
+for cod in ('P01', 'P02', 'NE'):
+    for k, v in D['produtos'][cod]['spec']:
+        ws.append([cod if cod != 'NE' else 'P02 ou PI01', k, v])
+ws.append([])
+ws.append(['', 'Fonte', 'Links do fabricante informados pela arquitetura (Portinari). Conferir na ficha técnica vigente.'])
 wb.save(OUT)
 print('ok', OUT)

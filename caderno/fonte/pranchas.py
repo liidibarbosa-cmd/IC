@@ -179,6 +179,7 @@ POS = {  # posição dos rótulos (m, coordenadas locais) e rotação
 def folha_pisos():
     pl = Planta(3.6, 5.8, 29.6, 40.6, 125)
     base(pl)
+    soleiras(pl)
     nomes = {'QCA': 'Quarto Casal', 'CLO': 'Closet Casal'}
     for zid, (p, rot) in POS.items():
         z = Z[zid]
@@ -190,7 +191,7 @@ def folha_pisos():
         if zid == 'DEC':
             nome = 'Deck'
         if zid == 'COR':
-            rotulo(pl, p, 'Corredor Lateral', 'A CONFIRMAR', a, rot=rot, cod_fill=C['rust'])
+            rotulo(pl, p, 'Corredor Lateral Externo', 'P02 ou PI01', a, rot=rot, cod_fill=C['rust'], size=4.6)
             continue
         size = 4.6 if zid in ('BCA', 'W01', 'W02', 'BEX', 'DEP', 'LAV', 'CIR') else 5.3
         rotulo(pl, p, nome, z['cod'], a, rot=rot, size=size)
@@ -210,6 +211,19 @@ def folha_pisos():
     for t, p in TPOS.items():
         pl.diamond(p, t)
     return pl
+
+
+SOLSEG = {'T01': 'P02', 'T02': 'P07', 'T03': 'P05a', 'T04': 'P05b', 'T05': 'P10', 'T06': 'P11', 'T07': 'P03',
+          'T08': ((4.191, 15.036), (11.591, 15.036)), 'T09': ((11.591, 15.036), (11.591, 19.536))}
+
+
+def soleiras(pl):
+    for so in D['soleiras']:
+        seg = SOLSEG[so['t']]
+        a, b = (D['vaos'][seg]['a'], D['vaos'][seg]['b']) if isinstance(seg, str) else seg
+        assert abs(math.dist(a, b) - so['comp']) < 0.006, so
+        pl.line([a, b], '#8d8475', 1.25)
+        pl.line([a, b], '#f1ede4', 0.75)
 
 
 TPOS = {'T01': (4.74, 20.21), 'T02': (5.616, 21.29), 'T03': (13.49, 27.76), 'T04': (15.266, 25.94),
@@ -296,7 +310,7 @@ def folha_rodapes():
             p = (13.0, 23.2)
         rotulo(pl, p, nome, r['cod'], br(r['liquido']) + ' m', rot=rot, size=size,
                cod_fill=cor[r['cod']])
-    rotulo(pl, POS['COR'][0], 'Corredor Lateral', 'sem rodapé', 'piso A CONFIRMAR', rot=90, size=4.6, cod_fill=C['olive2'])
+    rotulo(pl, POS['COR'][0], 'Corredor Lateral Externo', 'sem rodapé', 'P02 ou PI01', rot=90, size=4.6, cod_fill=C['olive2'])
     pl.text((19.84, 35.9), 'PISCINA', size=5.3, weight=700, ls=0.35)
     pl.text((19.84, 35.3), 'sem rodapé na borda', size=4.6, weight=400, italic=True)
     pl.text((8.0, 15.5), 'frente aberta — sem rodapé', size=4.4, weight=500, italic=True, fill=C['olive2'])
@@ -418,41 +432,38 @@ def folha1():
     leg = f"""
 <div class="abs leg" style="left:250.5mm;top:10mm;width:37mm">
   <div class="lbl">Legenda</div>
-  <div class="it"><div class="sw" style="background:{C['P01']}"></div><div><b>P01</b> Santorini Off White padrão</div></div>
-  <div class="it"><div class="sw" style="background:{C['P02']}"></div><div><b>P02</b> Santorini Off White HARD</div></div>
+  <div class="it"><div class="sw" style="background:{C['P01']}"></div><div><b>P01</b> Santorini OFW NAT 90 × 90</div></div>
+  <div class="it"><div class="sw" style="background:{C['P02']}"></div><div><b>P02</b> Santorini SGR HARD 90 × 90</div></div>
   <div class="it"><div class="sw" style="background:{C['PP01']};background-image:radial-gradient(#b9b3a3 0.35mm, transparent 0.4mm);background-size:1.6mm 1.6mm"></div><div><b>PP01</b> Pedra portuguesa branca</div></div>
-  <div class="it"><div class="sw" style="background:repeating-linear-gradient(45deg,{C['bg']} 0 0.8mm,{C['rust']} 0.8mm 0.95mm)"></div><div>Piso não definido — A CONFIRMAR</div></div>
+  <div class="it"><div class="sw" style="background:repeating-linear-gradient(45deg,{C['bg']} 0 0.8mm,{C['rust']} 0.8mm 0.95mm)"></div><div>A definir: P02 ou PI01 (intertravado drenante)</div></div>
   <div class="it"><div class="sw" style="background:{C['verde']}"></div><div>Área verde (sem piso)</div></div>
   <div class="it"><div class="sw" style="background:{C['agua']}"></div><div>Piscina</div></div>
   <div class="it"><svg width="7mm" height="5mm" viewBox="0 0 7 5" style="margin-right:2.4mm;flex:none"><path d="M3.5,0 L6,2.5 L3.5,5 L1,2.5Z" fill="{C['olive2']}"/></svg><div>Transição de piso (folha 05/05)</div></div>
+  <div class="it"><svg width="7mm" height="3mm" viewBox="0 0 7 3" style="margin-right:2.4mm;flex:none"><line x1="0" y1="1.5" x2="7" y2="1.5" stroke="#8d8475" stroke-width="1.25"/><line x1="0" y1="1.5" x2="7" y2="1.5" stroke="#f1ede4" stroke-width="0.75"/></svg><div>Soleira mármore Itaúnas, baguete 5 cm</div></div>
   <div class="it"><svg width="7mm" height="3mm" viewBox="0 0 7 3" style="margin-right:2.4mm;flex:none"><line x1="0" y1="1.5" x2="7" y2="1.5" stroke="{C['olive2']}" stroke-width="0.25" stroke-dasharray="3 .8 .5 .8"/></svg><div>Divisa do lote</div></div>
   <div class="lbl" style="margin-top:7mm">Escala</div>
   <div class="disp" style="font-size:21pt;margin-top:1.4mm">1/125</div>
   {escala_bar(125)}
   <div class="small" style="margin-top:2.2mm;color:{C['olive2']}">Imprimir em A3 sem ajuste de escala.</div>
-  <div class="lbl" style="margin-top:7mm">Referência</div>
-  <div class="small" style="margin-top:1.6mm">Base: <i>PROJETO IVAN E ANA - R01.dwg</i>, desenho “PLANTA DE PISO”. Paredes, vãos e limites reproduzidos do DWG, sem alteração.</div>
-  <div class="small" style="margin-top:1.6mm">Áreas por ambiente e fonte de cada medida no Quadro de Pisos, folha 02/05.</div>
-  <div class="small" style="margin-top:1.6mm">² Quarto Casal + Closet Casal: 28,70 m² no conjunto.</div>
+  <div class="small" style="margin-top:6mm">² Quarto Casal + Closet Casal: 28,70 m² no conjunto.</div>
 </div>"""
-    rows = ''.join(f"""<tr><td><span class="cb {'ne' if c == 'NE' else 'ol'}">{'—' if c == 'NE' else c}</span></td><td>{esc(P[c]['produto'] if c != 'NE' else 'Corredor Lateral — piso A CONFIRMAR')}</td><td class="n">{br(sub[c])}</td></tr>"""
+    rows = ''.join(f"""<tr><td><span class="cb {'ne' if c == 'NE' else 'ol'}">{'—' if c == 'NE' else c}</span></td><td>{esc(P[c]['produto'] if c != 'NE' else 'Corredor Lateral Externo — P02 ou PI01 (a definir)')}</td><td class="n">{br(sub[c])}</td></tr>"""
                    for c in ('P01', 'P02', 'PP01', 'NE'))
-    tot = round(sub['P01'] + sub['P02'] + sub['PP01'], 2)
+    tot = round(sub['P01'] + sub['P02'] + sub['PP01'] + sub['NE'], 2)
     R = D['rod_total']
     t1 = f"""
 <div class="abs" style="left:10mm;top:322mm;width:77mm">
   <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.6mm"><span class="ttl">Pisos</span><span style="font-size:5.6pt;color:{C['olive2']}">áreas em m²</span></div>
   <table><tr><th>Cód.</th><th>Produto</th><th class="n">Área</th></tr>{rows}
-  <tr class="tot"><td colspan="2">Total especificado (P01 + P02 + PP01)</td><td class="n">{br(tot)}</td></tr></table>
-  <div style="font-size:5.6pt;color:{C['olive2']};margin-top:1.4mm">Corredor Lateral fora do total até a definição do piso.</div>
+  <tr class="tot"><td colspan="2">Total geral</td><td class="n">{br(tot)}</td></tr></table>
 </div>
 <div class="abs" style="left:92mm;top:322mm;width:77mm">
   <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.6mm"><span class="ttl">Rodapés</span><span style="font-size:5.6pt;color:{C['olive2']}">metros lineares</span></div>
   <table><tr><th>Cód.</th><th>Rodapé (h = 8 cm)</th><th class="n">Líquido</th></tr>
-  <tr><td><span class="cb">R01</span></td><td>Santorini Off White padrão — mesmo piso P01</td><td class="n">{br(R['R01'])}</td></tr>
-  <tr><td><span class="cb gr">R02</span></td><td>Santorini Off White HARD — mesmo piso P02</td><td class="n">{br(R['R02'])}</td></tr>
+  <tr><td><span class="cb">R01</span></td><td>Santorini OFW NAT — mesmo piso P01</td><td class="n">{br(R['R01'])}</td></tr>
+  <tr><td><span class="cb gr">R02</span></td><td>Santorini SGR HARD — mesmo piso P02</td><td class="n">{br(R['R02'])}</td></tr>
   <tr class="tot"><td colspan="2">Total</td><td class="n">{br(R['R01'] + R['R02'])}</td></tr></table>
-  <div style="font-size:5.6pt;color:{C['olive2']};margin-top:1.4mm;line-height:1.4">Trechos e memória de cálculo nas folhas 03/05 e 04/05. Sem rodapé em PP01 e no Corredor Lateral.</div>
+  <div style="font-size:5.6pt;color:{C['olive2']};margin-top:1.4mm;line-height:1.4">Trechos e memória de cálculo nas folhas 03/05 e 04/05. Sem rodapé em PP01 e no Corredor Lateral Externo.</div>
 </div>"""
     return f"""<section class="sheet">
 <div class="abs" style="left:{left:.2f}mm;top:{top:.2f}mm">{svg}</div>{leg}{t1}
@@ -460,64 +471,65 @@ def folha1():
 
 
 def tags(lst):
-    return ''.join(f'<span class="tag {t}">{ {"Arquivo": "Confirmado no arquivo", "Informado": "Informado pela arquitetura", "Obra": "Conferir em obra", "Decisão": "Decisão da arquitetura"}[t]}</span>' for t in lst)
+    return ''.join(f'<span class="tag {t}">{t}</span>' for t in lst)
+
+
+LEG_CONTROLE = ('Controle dos dados: <span class="tag Arquivo">Arquivo</span> confirmado no arquivo · <span class="tag Informado">Informado</span> '
+                'informado pela arquitetura · <span class="tag Obra">Obra</span> conferir em obra · <span class="tag Decisão">Decisão</span> decisão da arquitetura.')
 
 
 def folha2():
     P = D['produtos']
     sub = pisos_totais()
     rows = ''
-    nomes = {'P01': 'P01 · Porcelanato Santorini Off White padrão', 'P02': 'P02 · Porcelanato Santorini Off White HARD',
-             'PP01': 'PP01 · Pedra portuguesa branca', 'NE': 'Piso não definido — A CONFIRMAR'}
+    nomes = {'P01': 'P01 · Porcelanato Santorini OFW NAT — Portinari', 'P02': 'P02 · Porcelanato Santorini SGR HARD — Portinari',
+             'PP01': 'PP01 · Pedra portuguesa branca', 'NE': 'A definir — P02 (Santorini SGR HARD) ou PI01 (piso intertravado drenante)'}
     for c in ('P01', 'P02', 'PP01', 'NE'):
         rows += f'<tr class="sec"><td colspan="9">{esc(nomes[c]).upper()}</td></tr>'
         for p in [x for x in D['pisos'] if x['cod'] == c]:
             pr = P[c]
-            rows += (f"<tr><td><span class='cb {'ne' if c == 'NE' else 'ol'}'>{'—' if c == 'NE' else c}</span></td><td>{esc(p['ambiente'])}</td>"
-                     f"<td>{esc(pr['produto'])}</td><td style='white-space:nowrap'>{esc(pr['fabricante'])}</td><td style='white-space:nowrap'>{esc(pr['formato'])}</td><td>{esc(pr['acabamento'])}</td>"
-                     f"<td class='n'><b>{br(p['area'])}</b></td><td style='font-size:5.9pt;line-height:1.3'>{esc(p['fonte'])}</td><td>{tags(p['controle'])}</td></tr>")
-        lab = 'Subtotal ' + (c if c != 'NE' else 'não definido (fora do total)')
-        rows += f"<tr class='sub'><td></td><td colspan='5'>{lab}</td><td class='n'>{br(sub[c])}</td><td colspan='2'></td></tr>"
-    tot = round(sub['P01'] + sub['P02'] + sub['PP01'], 2)
-    rows += f"<tr class='tot'><td></td><td colspan='5'>TOTAL GERAL ESPECIFICADO (P01 + P02 + PP01) — cada ambiente contado uma vez</td><td class='n'>{br(tot)}</td><td colspan='2'></td></tr>"
+            cb = "<span class='cb ne' style='font-size:4.2pt'>P02/PI01</span>" if c == 'NE' else f"<span class='cb ol'>{c}</span>"
+            rows += (f"<tr><td>{cb}</td><td>{esc(p['ambiente'])}</td>"
+                     f"<td>{esc(pr['produto'])}</td><td>{esc(pr['fabricante'])}</td><td style='white-space:nowrap'>{esc(pr['formato'])}</td>"
+                     f"<td>{esc(pr['acabamento'])}</td><td>{esc(pr['rejunte'])}</td>"
+                     f"<td class='n'><b>{br(p['area'])}</b></td><td>{tags(p['controle'])}</td></tr>")
+        lab = 'Subtotal ' + (c if c != 'NE' else 'a definir (P02 ou PI01)')
+        rows += f"<tr class='sub'><td></td><td colspan='6'>{lab}</td><td class='n'>{br(sub[c])}</td><td></td></tr>"
+    tot = round(sum(sub.values()), 2)
+    rows += f"<tr class='tot'><td></td><td colspan='6'>TOTAL GERAL (P01 + P02 + PP01 + a definir) — cada ambiente contado uma vez</td><td class='n'>{br(tot)}</td><td></td></tr>"
+
+    def ficha(c, titulo):
+        linhas = ''.join(f"<tr><td style='width:19mm;color:{C['rust_t']};font-weight:700;font-size:6.1pt'>{esc(k).upper()}</td>"
+                         f"<td style='font-size:6.6pt'>{esc(v)}</td></tr>" for k, v in P[c]['spec'])
+        return (f"<div style='flex:1'><div style='display:flex;align-items:center;gap:2mm;margin-bottom:1.2mm'>"
+                f"<span class='cb ol'>{c}</span><span class='ttl' style='font-size:10.5pt'>{esc(titulo)}</span></div>"
+                f"<table>{linhas}</table></div>")
+    fichas = ficha('P01', 'Santorini OFW NAT 90 × 90') + ficha('P02', 'Santorini SGR HARD 90 × 90')
     ex = D['extras']
-    notas = f"""
-<div class="abs notes" style="left:10mm;top:{0}mm;width:277mm"></div>"""
     return f"""<section class="sheet">
 <div class="abs head" style="left:10mm;top:10mm"><div class="lbl">Pisos e rodapés · Revisão 00</div><h1>Quadro de pisos</h1></div>
 <div class="abs" style="left:10mm;top:33mm;width:277mm">
 <table>
-<colgroup><col style="width:10mm"><col style="width:38mm"><col style="width:35mm"><col style="width:22mm"><col style="width:22mm"><col style="width:23mm"><col style="width:13mm"><col><col style="width:27mm"></colgroup>
-<tr><th>Cód.</th><th>Ambiente</th><th>Produto</th><th>Fabricante</th><th>Formato</th><th>Acabamento</th><th class="n">Área m²</th><th>Fonte da medida</th><th>Controle</th></tr>
+<colgroup><col style="width:17mm"><col style="width:50mm"><col style="width:44mm"><col style="width:22mm"><col style="width:24mm"><col style="width:27mm"><col><col style="width:14mm"><col style="width:28mm"></colgroup>
+<tr><th>Cód.</th><th>Ambiente</th><th>Produto</th><th>Fabricante</th><th>Formato</th><th>Acabamento</th><th>Rejunte</th><th class="n">Área m²</th><th>Controle</th></tr>
 {rows}
 </table>
+<div class="lbl" style="margin:5mm 0 2.4mm">Especificação dos porcelanatos — dados do fabricante</div>
+<div style="display:flex;gap:8mm">{fichas}</div>
 </div>
 <div class="normas notes" style="top:332mm;height:78.1mm;display:flex;gap:6mm;padding-top:4.5mm">
 <div style="flex:1"><h4 style="margin-top:0">Critérios</h4><ol>
-<li><b class="nn">1</b><span>¹ P01: produto informado; fabricante, formato e acabamento informados apenas para a versão HARD (Portinari, 90 × 90). Confirmar para a versão padrão.</span></li>
-<li><b class="nn">2</b><span>Áreas pela face interna das paredes, sem as soleiras dos vãos. Nas divergências entre documentos, adotado o maior valor (orientação da arquitetura); os demais valores aparecem na fonte.</span></li>
-<li><b class="nn">3</b><span>Deck: faixas de 1,00 m sob o beiral incluídas (DWG da Prefeitura: “PROJEÇÃO DO BEIRAL”, fora das áreas permeáveis). Piscina não pavimentada.</span></li>
+<li><b class="nn">1</b><span>Dados técnicos dos porcelanatos pelos links do fabricante informados pela arquitetura (Portinari). Conferir na ficha técnica vigente antes da compra.</span></li>
+<li><b class="nn">2</b><span>Rejunte: cor Corda e junta seca, conforme o fabricante. O tipo da argamassa de rejuntamento (NBR 14992) é proposta e depende da aprovação da arquitetura.</span></li>
+<li><b class="nn">3</b><span>Áreas pela face interna das paredes, sem soleiras. Nas divergências entre documentos, adotado o maior valor.</span></li>
 </ol></div>
 <div style="flex:1"><h4 style="margin-top:0">&nbsp;</h4><ol>
-<li><b class="nn">4</b><span>Calçada: faixa de acesso 1,25 + faixa livre 1,10 = 2,35 m, sem o meio-fio de 0,15 m (com o meio-fio: {br(ex['calcada_com_meiofio'])} m²). Término junto à Av. 3 não fechado no DWG: A CONFIRMAR.</span></li>
-<li><b class="nn">5</b><span>Rampa: adotado o valor informado, 37,00 m² (7,40 × 5,00); a geometria com a borda curva (arco r = 12,142 m) resulta em {br(ex['rampa_geo'])} m².</span></li>
-<li><b class="nn">6</b><span>Quantitativos líquidos, sem perdas de compra. Níveis não considerados neste caderno (orientação da arquitetura).</span></li>
-</ol></div></div>
+<li><b class="nn">4</b><span>Deck com as faixas de 1,00 m sob o beiral. Piscina não pavimentada.</span></li>
+<li><b class="nn">5</b><span>Calçada: faixas 1,25 + 1,10 = 2,35 m, sem o meio-fio (com ele: {br(ex['calcada_com_meiofio'])} m²). Término junto à Av. 3 A CONFIRMAR. Rampa: valor informado; pela geometria, {br(ex['rampa_geo'])} m².</span></li>
+<li><b class="nn">6</b><span>Quantitativos líquidos, sem perdas de compra. Níveis não considerados.</span></li>
+</ol></div><div class="small" style="position:absolute;left:7.5mm;right:7.5mm;bottom:5.5mm">{LEG_CONTROLE}</div></div>
 {carimbo(2, 'Quadro de pisos', 'Sem escala', 332.0, 78.1)}
 </section>"""
-
-
-def normas():
-    return f"""<div class="normas" style="top:332mm;height:78.1mm">
-<div class="lbl" style="margin-bottom:2.2mm">Normas de referência</div>
-<table>
-<tr><td style="width:24mm"><b>NBR 15463</b></td><td>Placas cerâmicas — porcelanato.</td></tr>
-<tr><td><b>NBR 13753</b></td><td>Revestimento de piso interno ou externo com placas cerâmicas e argamassa colante — procedimento.</td></tr>
-<tr><td><b>NBR 9050</b></td><td>Acessibilidade — calçadas, faixa livre e inclinações.</td></tr>
-<tr><td><b>NBR 15575-3</b></td><td>Edificações habitacionais — desempenho — sistemas de pisos.</td></tr>
-</table>
-<div class="small" style="position:absolute;left:7.5mm;right:7.5mm;bottom:6mm;color:{C['olive2']}">Controle dos dados: <span class="tag Arquivo">Confirmado no arquivo</span> <span class="tag Informado">Informado pela arquitetura</span> <span class="tag Obra">Conferir em obra</span> <span class="tag Decisão">Decisão da arquitetura</span><br>Marcas, fornecedores e valores de compra constam apenas do memorial de compras, documento à parte.</div>
-</div>"""
 
 
 def folha3():
@@ -529,8 +541,8 @@ def folha3():
     leg = f"""
 <div class="abs leg" style="left:250.5mm;top:10mm;width:37mm">
   <div class="lbl">Legenda</div>
-  <div class="it"><div class="ln" style="border-top:0.75mm solid {C['rust']}"></div><div><b>R01</b> Rodapé Santorini Off White padrão, h = 8 cm</div></div>
-  <div class="it"><div class="ln" style="border-top:0.75mm solid #2f5f55"></div><div><b>R02</b> Rodapé Santorini Off White HARD, h = 8 cm</div></div>
+  <div class="it"><div class="ln" style="border-top:0.75mm solid {C['rust']}"></div><div><b>R01</b> Rodapé Santorini OFW NAT, h = 8 cm</div></div>
+  <div class="it"><div class="ln" style="border-top:0.75mm solid #2f5f55"></div><div><b>R02</b> Rodapé Santorini SGR HARD, h = 8 cm</div></div>
   <div class="it"><svg width="7mm" height="4mm" viewBox="0 0 7 4" style="margin-right:2.4mm;flex:none"><line x1="0" y1="2.6" x2="4.2" y2="2.6" stroke="{C['rust']}" stroke-width="0.75"/><line x1="4.1" y1="3.2" x2="4.1" y2="0.8" stroke="{C['rust']}" stroke-width="0.25"/></svg><div>Início / fim de trecho de rodapé</div></div>
   <div class="it"><svg width="7mm" height="5mm" viewBox="0 0 7 5" style="margin-right:2.4mm;flex:none"><circle cx="3.5" cy="2.5" r="2.1" fill="{C['rust']}"/></svg><div>Vão de porta descontado — largura do DWG (m)</div></div>
   <div class="it"><div class="sw" style="background:{C['bg']}"></div><div>Face de parede sem rodapé</div></div>
@@ -539,8 +551,6 @@ def folha3():
   <div class="disp" style="font-size:21pt;margin-top:1.4mm">1/100</div>
   {escala_bar(100)}
   <div class="small" style="margin-top:2.2mm;color:{C['olive2']}">Imprimir em A3 sem ajuste de escala.</div>
-  <div class="lbl" style="margin-top:7mm">Referência</div>
-  <div class="small" style="margin-top:1.6mm">Trechos medidos na geometria do DWG (face interna). Memória de cálculo por ambiente na folha 04/05.</div>
 </div>"""
     cad = D['caderno_larg']
     vrows = ''
@@ -563,8 +573,8 @@ def folha3():
 <div class="abs" style="left:92mm;top:322mm;width:77mm">
   <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.6mm"><span class="ttl">Rodapés</span><span style="font-size:5.6pt;color:{C['olive2']}">metros lineares</span></div>
   <table><tr><th>Cód.</th><th>Rodapé (h = 8 cm)</th><th class="n">Líquido</th></tr>
-  <tr><td><span class="cb">R01</span></td><td>Santorini Off White padrão</td><td class="n">{br(R['R01'])}</td></tr>
-  <tr><td><span class="cb gr">R02</span></td><td>Santorini Off White HARD</td><td class="n">{br(R['R02'])}</td></tr>
+  <tr><td><span class="cb">R01</span></td><td>Santorini OFW NAT</td><td class="n">{br(R['R01'])}</td></tr>
+  <tr><td><span class="cb gr">R02</span></td><td>Santorini SGR HARD</td><td class="n">{br(R['R02'])}</td></tr>
   <tr class="tot"><td colspan="2">Total</td><td class="n">{br(R['R01'] + R['R02'])}</td></tr></table>
   <div style="font-size:5.6pt;color:{C['olive2']};margin-top:1.6mm;line-height:1.45">Descontos pelos vãos do DWG (orientação da arquitetura). Em vermelho, vão do DWG diferente do Quadro de Esquadrias Rev. 01. P04 (4,20) não está desenhada no DWG: largura informada.</div>
 </div>"""
@@ -575,7 +585,7 @@ def folha3():
 
 def folha4():
     rows = ''
-    nomes = {'R01': 'R01 · Rodapé Santorini Off White padrão · h = 8 cm', 'R02': 'R02 · Rodapé Santorini Off White HARD · h = 8 cm'}
+    nomes = {'R01': 'R01 · Rodapé Porcelanato Santorini OFW NAT · h = 8 cm', 'R02': 'R02 · Rodapé Porcelanato Santorini SGR HARD · h = 8 cm'}
     for c in ('R01', 'R02'):
         rows += f'<tr class="sec"><td colspan="8">{esc(nomes[c]).upper()}</td></tr>'
         for r in [x for x in D['rodapes'] if x['cod'] == c]:
@@ -599,20 +609,19 @@ def folha4():
 <tr><th>Cód.</th><th>Ambiente</th><th>Trechos de parede (m) — posição na planta</th><th class="n">Soma</th><th>Vãos de porta descontados (DWG)</th><th class="n">Vãos</th><th class="n">Líquido</th><th>Controle</th></tr>
 {rows}
 </table>
-<div class="notes" style="display:flex;gap:9mm;margin-top:1mm">
-<div style="flex:1"><h4>Regra de cálculo</h4><ol>
+</div>
+<div class="normas notes" style="top:332mm;height:78.1mm;display:flex;gap:6mm;padding-top:4.5mm">
+<div style="flex:1"><h4 style="margin-top:0">Regra de cálculo</h4><ol>
 <li><b class="nn">1</b><span>Rodapé líquido = soma dos trechos de parede − vãos de porta aplicáveis. Janelas não são descontadas. Cada face de parede entra uma única vez; as duas faces de uma mesma parede pertencem a ambientes diferentes.</span></li>
-<li><b class="nn">2</b><span>Material do rodapé = piso do ambiente: P01 → R01 (padrão); P02 → R02 (HARD). Altura 8 cm (informada). Sem rodapé em PP01 (rampa, acesso externo e calçada) e no Corredor Lateral.</span></li>
+<li><b class="nn">2</b><span>Material do rodapé = piso do ambiente: P01 → R01 (Santorini OFW NAT); P02 → R02 (Santorini SGR HARD). Altura 8 cm (informada), rejunte igual ao do piso. Sem rodapé em PP01 (rampa, acesso externo e calçada) e no Corredor Lateral Externo.</span></li>
 <li><b class="nn">3</b><span>Trechos sem rodapé: faces abertas da garagem (frente 7,40 e lateral 4,50), lado aberto da varanda, bordas da piscina e limites com áreas verdes.</span></li>
 </ol></div>
-<div style="flex:1"><h4>&nbsp;</h4><ol>
+<div style="flex:1"><h4 style="margin-top:0">&nbsp;</h4><ol>
 <li><b class="nn">4</b><span>Vãos pelo DWG (orientação da arquitetura). P04 (4,20) não está no DWG: descontada como passagem entre Cozinha e Sala, conforme informado. Com as larguras do Quadro de Esquadrias Rev. 01 o líquido de R01 seria {br(R['R01'] - DELTA_CAD['R01'])} m e o de R02, {br(R['R02'] - DELTA_CAD['R02'])} m.</span></li>
 <li><b class="nn">5</b><span>Circulação Interna: inclui o nicho de 0,70 × 3,15 m (futura marcenaria), com piso e rodapé, conforme informado.</span></li>
 <li><b class="nn">6</b><span>Metros lineares líquidos, sem perdas de corte ou de compra.</span></li>
-</ol></div></div>
-</div>
+</ol></div><div class="small" style="position:absolute;left:7.5mm;right:7.5mm;bottom:5.5mm">{LEG_CONTROLE}</div></div>
 {carimbo(4, 'Memória de cálculo dos rodapés', 'Sem escala', 332.0, 78.1)}
-{normas()}
 </section>"""
 
 
@@ -624,47 +633,61 @@ for r in D['rodapes']:
 DELTA_CAD = {k: round(v, 3) for k, v in DELTA_CAD.items()}
 
 PEND_DECISAO = [
-    'P01 — fabricante, formato e acabamento do Santorini Off White padrão (informado apenas o HARD: Portinari 90 × 90).',
-    'PP01 — formato/granulometria da pedra portuguesa branca, assentamento e rejunte.',
-    'Corredor Lateral (23,93 m² informado; 23,42 m² no DWG) — piso não definido; sem rodapé até a definição.',
-    'Calçada — término junto à Av. 3 (linhas abertas no DWG). A planta da Prefeitura indica concreto vassourado na faixa de acesso e grama na faixa de serviço: confirmar a exigência municipal antes de executar pedra portuguesa.',
-    'Acesso externo lateral (15,03 m², hachura do DWG) — a Prefeitura indica concreto vassourado; a planta do caderno de esquadrias mostra grama com pisantes. Confirmar o limite da pedra portuguesa.',
-    'Rodapé em áreas molhadas (WCs, banheiros, cozinha e lavanderia): compatibilizar com o Caderno 02/02 (revestimento de parede). Se a parede for revestida até o piso, o rodapé do trecho deixa de ser necessário.',
-    'P04 — esquadria não desenhada no DWG; posição do trilho e acabamento no piso.',
-    'Soleiras, trilhos embutidos (P04, P05, P07, P10), borda da piscina e arremates com jardim — não documentados.',
+    'Corredor Lateral Externo (23,93 m², incluído no total): definir entre P02 (Santorini SGR HARD) e PI01 (piso intertravado drenante). Dimensões, espessura, cor e resistência do PI01: A CONFIRMAR (anúncio não acessível na elaboração). Sem rodapé.',
+    'P02: o produto do link é o Santorini SGR HARD (SGR = Stone Gray, cinza), não uma versão Off White. Confirmar a cor para a varanda, o deck e o rodapé R02.',
+    'P01 (Santorini OFW NAT): confirmar na ficha técnica o código Portinari, a variação de tonalidade e a classe de uso (as fontes consultadas divergem entre USO 5 e USO 6).',
+    'Rejunte: aprovar o tipo proposto (NBR 14992 tipo II em áreas externas e molhadas; tipo I em áreas secas), a marca e a largura da junta, conforme o manual de assentamento Portinari.',
+    'PP01: formato/granulometria da pedra portuguesa branca, assentamento e rejunte.',
+    'Calçada: término junto à Av. 3 (linhas abertas no DWG). A Prefeitura indica concreto vassourado na faixa de acesso e grama na faixa de serviço; confirmar a exigência municipal.',
+    'Acesso externo lateral (15,03 m²): a Prefeitura indica concreto vassourado; a planta do caderno de esquadrias mostra grama com pisantes. Confirmar o limite da pedra portuguesa.',
+    'Rodapé em áreas molhadas: compatibilizar com o Caderno 02/02 (revestimento de parede).',
+    'Soleiras de mármore × trilhos embutidos de P05, P07 e P10, e posição do trilho de P04 (não desenhada no DWG).',
+    'Borda da piscina e arremates entre piso e jardim — não documentados.',
 ]
 PEND_OBRA = [
-    'Vãos executados × vãos do DWG × Quadro de Esquadrias Rev. 01: 13 das 20 portas têm largura diferente. Os descontos usam o DWG.',
-    'Áreas divergentes adotadas pelo maior valor: Quarto Casal + Closet 28,70 (geom. 28,53); Banheiro Casal 6,83 (6,30); Banheiro Externo 4,62 (4,27); Circulação 12,85 (geom. 12,29; informado 10,08); Garagem 37,65 (36,97); Varanda 18,32 (18,22); Rampa 37,00 (geom. 34,61); Corredor Lateral 23,93 (23,42).',
-    'Rampa: limite direito considerado em x = 11,591 (alinhamento da garagem); há guia/muro a 0,10 m (x = 11,691).',
+    'Vãos executados × vãos do DWG × Quadro de Esquadrias Rev. 01: 13 das 20 portas têm largura diferente. Descontos de rodapé e comprimentos de soleira pelo DWG.',
+    'Áreas divergentes adotadas pelo maior valor: Quarto Casal + Closet 28,70; Banheiro Casal 6,83; Banheiro Externo 4,62; Circulação 12,85; Garagem 37,65; Varanda 18,32; Rampa 37,00; Corredor Lateral Externo 23,93.',
+    'Rampa: limite direito considerado no alinhamento da garagem; há guia/muro 0,10 m adiante.',
     'Rodapé atrás de marcenaria (closet, nicho da circulação, armários): conferir com o projeto de marcenaria.',
-    'Tubo junto à parede superior da garagem (x ≈ 8,66–8,76): recortar o rodapé em obra.',
+    'Tubo junto à parede superior da garagem: recortar o rodapé em obra.',
     'Todas as medidas devem ser conferidas no local antes da compra.',
 ]
 
 
 def folha5():
-    rows = ''.join(f"<tr><td><span class='cb ol' style='border-radius:1mm'>{t}</span></td><td>{esc(p)}</td><td>{esc(e)}</td><td>{esc(o)}</td><td>{tags([s])}</td></tr>"
-                   for t, p, e, o, s in D['transicoes'])
+    rows = ''.join(f"<tr><td><span class='cb ol' style='border-radius:1mm'>{t}</span></td><td>{esc(p)}</td><td>{esc(e)}</td><td>{esc(o)}</td>"
+                   f"<td class='n'>{br(v) if v else '—'}</td><td>{tags([s])}</td></tr>"
+                   for t, p, e, o, s, v in D['transicoes'])
+    tot_sol = sum(x['comp'] for x in D['soleiras'])
+    rows += (f"<tr class='tot'><td></td><td colspan='3'>TOTAL DE SOLEIRAS — mármore Itaúnas, baguete 5 cm ({len(D['soleiras'])} trechos)</td>"
+             f"<td class='n'>{br(tot_sol)}</td><td></td></tr>")
     pd = ''.join(f'<li><b class="nn">{i}</b><span>{esc(s)}</span></li>' for i, s in enumerate(PEND_DECISAO, 1))
     po = ''.join(f'<li><b class="nn">{i}</b><span>{esc(s)}</span></li>' for i, s in enumerate(PEND_OBRA, len(PEND_DECISAO) + 1))
     return f"""<section class="sheet">
 <div class="abs head" style="left:10mm;top:10mm"><div class="lbl">Pisos e rodapés · Revisão 00</div><h1>Transições e pendências</h1></div>
 <div class="abs" style="left:10mm;top:33mm;width:277mm">
 <table>
-<colgroup><col style="width:12mm"><col style="width:20mm"><col style="width:78mm"><col><col style="width:32mm"></colgroup>
-<tr><th>Cód.</th><th>Porta</th><th>Encontro de pisos</th><th>Situação documentada / decisão</th><th>Controle</th></tr>
+<colgroup><col style="width:12mm"><col style="width:19mm"><col style="width:78mm"><col><col style="width:17mm"><col style="width:32mm"></colgroup>
+<tr><th>Cód.</th><th>Porta</th><th>Encontro de pisos</th><th>Solução</th><th class="n">Soleira m</th><th>Controle</th></tr>
 {rows}
 </table>
 <div class="notes" style="display:flex;gap:9mm;margin-top:1mm">
 <div style="flex:1"><h4>Pendências — decisão da arquitetura</h4><ol>{pd}</ol></div>
-<div style="flex:1"><h4>Pendências — conferência em obra</h4><ol>{po}</ol>
-<h4>Observações</h4><ol><li><b class="nn">·</b><span>Paginação de piso não faz parte deste caderno (informado). Revestimentos de parede: Caderno 02/02.</span></li>
-<li><b class="nn">·</b><span>Fonte de títulos substituída pela Outfit: o arquivo da fonte do caderno de esquadrias (Aloevera Display) não estava disponível.</span></li></ol></div>
+<div style="flex:1"><h4>Pendências — conferência em obra</h4><ol>{po}</ol></div>
 </div>
+</div>
+<div class="normas notes" style="top:332mm;height:78.1mm;padding-top:4.5mm">
+<h4 style="margin-top:0">Critérios de transição (informados pela arquitetura)</h4><ol>
+<li><b class="nn">1</b><span>Mesmo produto/material, apenas com mudança de nível: perfil metálico.</span></li>
+<li><b class="nn">2</b><span>Troca de material: soleira de mármore Itaúnas, tipo baguete, com 5 cm de profundidade pelo comprimento do vão.</span></li>
+<li><b class="nn">3</b><span>Níveis não documentados neste caderno. Onde houver desnível entre pisos iguais, aplicar o critério 1.</span></li>
+</ol>
+<h4>Observações</h4><ol>
+<li><b class="nn">·</b><span>Paginação de piso não faz parte deste caderno. Revestimentos de parede: Caderno 02/02.</span></li>
+<li><b class="nn">·</b><span>Fonte de títulos substituída pela Outfit (Aloevera Display não disponível).</span></li></ol>
+<div class="small" style="position:absolute;left:7.5mm;right:7.5mm;bottom:5.5mm">{LEG_CONTROLE}</div>
 </div>
 {carimbo(5, 'Transições e pendências', 'Sem escala', 332.0, 78.1)}
-{normas()}
 </section>"""
 
 

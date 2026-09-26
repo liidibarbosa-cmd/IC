@@ -205,17 +205,35 @@ pisos = [
      'Hachura GRASS do DWG (pedra portuguesa) fora da rampa e das áreas verdes', [ARQ, OBRA]),
     ('PP01', 'Calçada — faixas de acesso e livre (2,35 m)', ['CAL'], round(pz('CAL'), 2),
      'Geometria DWG: divisa frontal 40,32 m × faixas 1,25 + 1,10; término na Av. 3 não fechado no DWG', [ARQ, OBRA]),
-    ('NE', 'Corredor Lateral', ['COR'], 23.93,
+    ('NE', 'Corredor Lateral Externo', ['COR'], 23.93,
      'Informado: 1,50 × 15,95 (aprox.); contorno da hachura DWG = %s (maior valor adotado)' % f"{pz('COR'):.2f}".replace('.', ','), [INF, OBRA]),
 ]
 
 PROD = {
-    'P01': dict(produto='Porcelanato Santorini Off White (padrão)', fabricante='A CONFIRMAR\u00a0¹', formato='A CONFIRMAR\u00a0¹',
-                acabamento='A CONFIRMAR\u00a0¹', cor='#ead8b4'),
-    'P02': dict(produto='Porcelanato Santorini Off White HARD', fabricante='Portinari', formato='90 × 90 cm',
-                acabamento='HARD (áreas externas)', cor='#c9c7ae'),
-    'PP01': dict(produto='Pedra portuguesa branca', fabricante='—', formato='A CONFIRMAR', acabamento='A CONFIRMAR', cor='#f3f1ea'),
-    'NE': dict(produto='Piso NÃO DEFINIDO', fabricante='A CONFIRMAR', formato='A CONFIRMAR', acabamento='A CONFIRMAR', cor='none'),
+    # dados técnicos: site do fabricante (portinarirevestimentos.com.br), links informados pela arquitetura;
+    # consulta indireta em 26/09/2026 (site bloqueado no ambiente de produção) — conferir na ficha técnica.
+    'P01': dict(produto='Porcelanato Santorini OFW NAT', fabricante='Portinari', formato='90 × 90 cm',
+                acabamento='Natural (NAT)', rejunte='Corda · junta seca', cor='#ead8b4',
+                spec=[('Descrição', 'Porcelanato esmaltado Santorini OFW NAT (Off White), borda retificada'),
+                      ('Fabricação', '900 × 900 mm · espessura 7,0 mm · monocalibre'),
+                      ('Embalagem', '3 peças / 2,43 m² por caixa'),
+                      ('Uso', 'áreas internas (Cód. Portinari, variação V e classe de uso: A CONFIRMAR na ficha)'),
+                      ('Junta', 'junta seca (fabricante)'),
+                      ('Rejunte', 'cor Corda (sugerida pelo fabricante) · proposta: argamassa de rejuntamento tipo II, NBR 14992, em WCs, banheiros, cozinha e lavanderia; tipo I nas áreas secas')]),
+    'P02': dict(produto='Porcelanato Santorini SGR HARD', fabricante='Portinari', formato='90 × 90 cm',
+                acabamento='HARD (antiderrapante)', rejunte='Corda · junta seca', cor='#c4c5b8',
+                spec=[('Descrição', 'Porcelanato esmaltado Santorini SGR HARD (Stone Gray, cinza), cód. 62928, borda retificada'),
+                      ('Fabricação', '900 × 900 mm · espessura 8,0 mm · monocalibre'),
+                      ('Embalagem', '2 peças / 1,62 m² por caixa'),
+                      ('Uso', 'USO 6 (residencial e comercial de tráfego intenso) · variação V3 · interno e externo'),
+                      ('Junta', 'junta seca (fabricante)'),
+                      ('Rejunte', 'cor Corda (sugerida pelo fabricante) · proposta: argamassa de rejuntamento tipo II, NBR 14992 (área externa)')]),
+    'PP01': dict(produto='Pedra portuguesa branca', fabricante='—', formato='A CONFIRMAR', acabamento='A CONFIRMAR',
+                 rejunte='A CONFIRMAR', cor='#f3f1ea', spec=[]),
+    'NE': dict(produto='A DEFINIR: P02 ou PI01', fabricante='Portinari / A CONFIRMAR', formato='90 × 90 cm ou A CONFIRMAR',
+               acabamento='HARD ou drenante', rejunte='Corda ou A CONFIRMAR', cor='none',
+               spec=[('Opção 1', 'P02 — Porcelanato Santorini SGR HARD (dados acima)'),
+                     ('Opção 2', 'PI01 — Piso intertravado drenante (lajota/bloquete de concreto): dimensões, espessura, cor e resistência A CONFIRMAR (anúncio não acessível)')]),
 }
 
 # ------------------------------------------------------------------ vãos (DWG)
@@ -317,23 +335,27 @@ for r in ROD:
     TOT[r['cod']] = round(TOT.get(r['cod'], 0) + r['liquido'], 3)
 
 # ----------------------------------------------------------------- transições
+SOL_MARMORE = 'Soleira mármore Itaúnas, baguete 5 cm × comprimento do vão'
+PERFIL = 'Perfil metálico (mesmo material, somente com desnível)'
 TRANS = [
-    ('T01', 'P02', 'Garagem (P01) / Corredor Lateral (piso A CONFIRMAR)', 'Encontro dependente da definição do piso do corredor lateral.', 'Decisão'),
-    ('T02', 'P07', 'Lavanderia (P01) / Corredor Lateral (piso A CONFIRMAR)', 'Porta de correr: trilho embutido no piso (caderno de esquadrias, notas 3 e 10).', 'Decisão'),
-    ('T03', 'P05', 'Sala TV / Sala Jantar (P01) / Varanda Gourmet (P02)', 'Troca padrão → HARD na linha da esquadria; trilho embutido (notas 3 e 10).', 'Arquivo'),
-    ('T04', 'P05', 'Sala TV / Sala Jantar (P01) / Deck (P02)', 'Troca padrão → HARD na linha da esquadria; trilho embutido (notas 3 e 10).', 'Arquivo'),
-    ('T05', 'P10', 'Quarto Casal (P01) / Deck (P02)', 'Troca padrão → HARD na linha da esquadria. Tipo de trilho da veneziana de correr A CONFIRMAR.', 'Decisão'),
-    ('T06', 'P11', 'Banheiro Externo (P01) / Deck (P02)', 'Troca padrão → HARD na linha da porta. Soleira A CONFIRMAR.', 'Decisão'),
-    ('T07', 'P03', 'Deck (P02) / Acesso externo (PP01)', 'Troca HARD → pedra portuguesa na linha do portão. Arremate/soleira A CONFIRMAR.', 'Decisão'),
-    ('T08', '—', 'Garagem (P01) / Rampa (PP01)', 'Frente aberta da garagem (7,40 m, linha y = 15,036). Arremate/junta A CONFIRMAR.', 'Decisão'),
-    ('T09', '—', 'Garagem (P01) / Acesso externo (PP01) e área verde', 'Lateral aberta da garagem (4,50 m). Arremate A CONFIRMAR.', 'Decisão'),
-    ('T10', '—', 'Varanda Gourmet (P02) / Deck (P02)', 'Mesmo acabamento: sem troca de material (limite de cobertura).', 'Arquivo'),
-    ('T11', '—', 'Deck (P02) / Piscina', 'Borda da piscina e acabamento de arremate não documentados: A CONFIRMAR.', 'Decisão'),
-    ('T12', '—', 'Deck (P02) e PP01 / áreas verdes', 'Contenção/arremate entre piso e jardim não documentado: A CONFIRMAR.', 'Decisão'),
-    ('T13', '—', 'Rampa (PP01) / Calçada (PP01) — divisa', 'Mesmo material. Continuidade na divisa conforme execução: conferir em obra.', 'Obra'),
-    ('T14', 'P04', 'Cozinha (P01) / Sala TV / Sala Jantar (P01)', 'Mesmo piso. P04 não está desenhada no DWG: posição do trilho A CONFIRMAR.', 'Decisão'),
-    ('T15', 'P06/P08/P09', 'Portas internas (P01 / P01)', 'Mesmo piso nos dois lados. Soleiras não documentadas: A CONFIRMAR se houver.', 'Decisão'),
+    # cód, porta, encontro, solução, controle, vão (m) com soleira de mármore (ou None)
+    ('T01', 'P02', 'Garagem (P01) / Corredor Lateral Externo (P02 ou PI01)', SOL_MARMORE + ' (0,80 m).', 'Informado', 0.80),
+    ('T02', 'P07', 'Lavanderia (P01) / Corredor Lateral Externo (P02 ou PI01)', SOL_MARMORE + ' (1,80 m). Compatibilizar com o trilho embutido (esquadrias, notas 3 e 10).', 'Informado', 1.80),
+    ('T03', 'P05', 'Sala TV / Sala Jantar (P01) / Varanda Gourmet (P02)', SOL_MARMORE + ' (3,00 m). Compatibilizar com o trilho embutido.', 'Informado', 3.00),
+    ('T04', 'P05', 'Sala TV / Sala Jantar (P01) / Deck (P02)', SOL_MARMORE + ' (3,00 m). Compatibilizar com o trilho embutido.', 'Informado', 3.00),
+    ('T05', 'P10', 'Quarto Casal (P01) / Deck (P02)', SOL_MARMORE + ' (2,70 m). Compatibilizar com o trilho da veneziana de correr.', 'Informado', 2.70),
+    ('T06', 'P11', 'Banheiro Externo (P01) / Deck (P02)', SOL_MARMORE + ' (0,80 m).', 'Informado', 0.80),
+    ('T07', 'P03', 'Deck (P02) / Acesso externo (PP01)', SOL_MARMORE + ' (0,90 m).', 'Informado', 0.90),
+    ('T08', '—', 'Garagem (P01) / Rampa (PP01) — frente aberta', SOL_MARMORE + ' (7,40 m, linha y = 15,036).', 'Informado', 7.40),
+    ('T09', '—', 'Garagem (P01) / Acesso externo (PP01) — lateral aberta', SOL_MARMORE + ' (4,50 m).', 'Informado', 4.50),
+    ('T10', '—', 'Varanda Gourmet (P02) / Deck (P02)', 'Mesmo material, sem desnível documentado: sem soleira. Havendo desnível: ' + PERFIL.lower() + '.', 'Informado', None),
+    ('T11', '—', 'Deck (P02) / Piscina', 'Borda da piscina e arremate não documentados: A CONFIRMAR.', 'Decisão', None),
+    ('T12', '—', 'Deck (P02) e PP01 / áreas verdes', 'Contenção/arremate entre piso e jardim não documentado: A CONFIRMAR.', 'Decisão', None),
+    ('T13', '—', 'Rampa (PP01) / Calçada (PP01) — divisa', 'Mesmo material: sem soleira. Havendo desnível: ' + PERFIL.lower() + '.', 'Informado', None),
+    ('T14', 'P04', 'Cozinha (P01) / Sala TV / Sala Jantar (P01)', 'Mesmo material: sem soleira. Havendo desnível: ' + PERFIL.lower() + '. Posição do trilho de P04 A CONFIRMAR.', 'Informado', None),
+    ('T15', 'P06/P08/P09', 'Portas internas (P01 / P01)', 'Mesmo material: sem soleira. Havendo desnível: ' + PERFIL.lower() + '.', 'Informado', None),
 ]
+SOLEIRAS = [dict(t=t[0], porta=t[1], encontro=t[2], comp=t[5]) for t in TRANS if t[5]]
 
 # ----------------------------------------------------------------- saída JSON
 geometria = dict(
@@ -343,7 +365,7 @@ geometria = dict(
 )
 dados = dict(
     zonas=Z, pisos=[dict(cod=c, ambiente=a, zonas=z, area=ar, fonte=f, controle=ct) for c, a, z, ar, f, ct in pisos],
-    produtos=PROD, vaos=V, caderno_larg=CADERNO_LARG, rodapes=ROD, rod_total=TOT, transicoes=TRANS,
+    produtos=PROD, vaos=V, caderno_larg=CADERNO_LARG, rodapes=ROD, rod_total=TOT, transicoes=TRANS, soleiras=SOLEIRAS,
     extras=dict(calcada_com_meiofio=AREA_CALC_COM_MEIOFIO, rampa_geo=pz('RAM'), deck_hachura=61.372,
                 giro_p03=round(math.pi * 0.9 ** 2 / 4, 3)),
 )
@@ -356,17 +378,22 @@ os.makedirs(Q, exist_ok=True)
 br = lambda v, n=2: f'{v:.{n}f}'.replace('.', ',')
 with open(os.path.join(Q, 'quadro_pisos.csv'), 'w', newline='', encoding='utf-8-sig') as f:
     w = csv.writer(f, delimiter=';')
-    w.writerow(['codigo', 'ambiente', 'produto', 'fabricante', 'formato', 'acabamento', 'area_m2', 'area_geometria_dwg_m2', 'fonte_da_medida', 'controle'])
+    w.writerow(['codigo', 'ambiente', 'produto', 'fabricante', 'formato', 'acabamento', 'rejunte', 'area_m2', 'area_geometria_dwg_m2', 'fonte_da_medida', 'controle'])
     for p in dados['pisos']:
         pr = PROD[p['cod']]
-        w.writerow([p['cod'], p['ambiente'], pr['produto'], pr['fabricante'], pr['formato'], pr['acabamento'], br(p['area']),
+        w.writerow([p['cod'], p['ambiente'], pr['produto'], pr['fabricante'], pr['formato'], pr['acabamento'], pr['rejunte'], br(p['area']),
                     br(sum(Z[z]['area_geo'] for z in p['zonas']), 3), p['fonte'], ' + '.join(p['controle'])])
     sub = {}
     for p in dados['pisos']:
         sub[p['cod']] = sub.get(p['cod'], 0) + p['area']
     for c, v in sub.items():
-        w.writerow([c, 'SUBTOTAL ' + PROD[c]['produto'], '', '', '', '', br(v), '', '', ''])
-    w.writerow(['', 'TOTAL GERAL ESPECIFICADO (P01 + P02 + PP01)', '', '', '', '', br(sum(v for c, v in sub.items() if c != 'NE')), '', '', ''])
+        w.writerow([c, 'SUBTOTAL ' + PROD[c]['produto'], '', '', '', '', '', br(v), '', '', ''])
+    w.writerow(['', 'TOTAL GERAL (P01 + P02 + PP01 + corredor a definir)', '', '', '', '', '', br(sum(sub.values())), '', '', ''])
+    w.writerow([])
+    w.writerow(['transicao', 'porta', 'encontro', 'soleira mármore Itaúnas baguete 5 cm — comprimento (m)'])
+    for so in SOLEIRAS:
+        w.writerow([so['t'], so['porta'], so['encontro'], br(so['comp'])])
+    w.writerow(['', '', 'TOTAL SOLEIRAS', br(sum(so['comp'] for so in SOLEIRAS))])
 with open(os.path.join(Q, 'memoria_rodapes.csv'), 'w', newline='', encoding='utf-8-sig') as f:
     w = csv.writer(f, delimiter=';')
     w.writerow(['codigo', 'ambiente', 'tipo', 'descricao', 'x_ini', 'y_ini', 'x_fim', 'y_fim', 'comprimento_m', 'fonte'])
