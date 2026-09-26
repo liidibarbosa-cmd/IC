@@ -66,22 +66,26 @@ def d1():
 
 
 def d2():
-    # corte: mesmo porcelanato, dois níveis, perfil metálico de transição
+    # corte: mesmo porcelanato em dois níveis, perfil metálico em L (cantoneira de acabamento)
     b = ''
-    b += '<rect x="4" y="58" width="120" height="16" fill="url(#cp2)" stroke="#8f8676" stroke-width="0.2"/>'
-    b += '<rect x="4" y="46" width="58" height="12" fill="url(#cp2)" stroke="#8f8676" stroke-width="0.2"/>'
-    b += '<rect x="4" y="44" width="58" height="2" fill="url(#ar2)"/>'
-    b += f'<rect x="4" y="40.6" width="56" height="3.4" fill="{P01}" stroke="{INK}" stroke-width="0.3"/>'
-    b += '<rect x="66" y="56" width="58" height="2" fill="url(#ar2)"/>'
-    b += f'<rect x="68" y="52.6" width="56" height="3.4" fill="{P01}" stroke="{INK}" stroke-width="0.3"/>'
-    # perfil em rampa com aba sobre o piso superior
-    b += (f'<path d="M56,40.6 L61,40.6 L68,52.6 L66.5,52.6 L60.6,42.6 L60.6,52 L59.6,52 L59.6,41.6 L56,41.6 Z" '
-          f'fill="{METAL}" stroke="{INK}" stroke-width="0.3"/>')
-    b += cota_v(78, 40.6, 52.6, 'desnível (h)')
-    b += lead(61, 41, 70, 26, 'Perfil metálico de transição\n(modelo, acabamento e altura A CONFIRMAR)')
-    b += lead(30, 42.3, 30, 30, 'Mesmo porcelanato nos dois lados')
-    b += lead(100, 54.3, 116, 86, 'Piso acabado — nível inferior', anchor='end')
-    b += lead(40, 52, 40, 80, 'Contrapiso / argamassa colante')
+    # nível superior (esquerda)
+    b += '<rect x="4" y="44" width="58" height="16" fill="url(#cp2)" stroke="#8f8676" stroke-width="0.2"/>'
+    b += '<rect x="4" y="41" width="58" height="3" fill="url(#ar2)"/>'
+    b += f'<rect x="4" y="36" width="58" height="5" fill="{P01}" stroke="{INK}" stroke-width="0.35"/>'
+    # nível inferior (direita)
+    b += '<rect x="62" y="52" width="61" height="8" fill="url(#cp2)" stroke="#8f8676" stroke-width="0.2"/>'
+    b += '<rect x="63.2" y="49" width="59.8" height="3" fill="url(#ar2)"/>'
+    b += f'<rect x="63.2" y="44" width="59.8" height="5" fill="{P01}" stroke="{INK}" stroke-width="0.35"/>'
+    # perfil em L: aba perfurada sob o piso superior + face vertical aparente
+    b += f'<path d="M44,42.7 L62,42.7 L62,36 L63.2,36 L63.2,44 L44,44 Z" fill="{METAL}" stroke="{INK}" stroke-width="0.35"/>'
+    for x in (45.5, 49.5, 53.5, 57.5):             # furos de ancoragem da aba
+        b += f'<rect x="{x}" y="43.0" width="2.6" height="0.75" fill="#e9e3d7" stroke="{INK}" stroke-width="0.12"/>'
+    b += cota_v(76, 36, 44, 'desnível (h)')
+    b += lead(62.6, 37, 70, 16, 'Perfil metálico em L (cantoneira)\nface aparente rente ao piso superior\nmaterial, acabamento e altura A CONFIRMAR')
+    b += lead(51, 43.4, 51, 70, 'Aba perfurada embutida na argamassa,\nsob o porcelanato do nível superior')
+    b += lead(20, 38.5, 20, 24, 'Mesmo porcelanato nos dois lados')
+    b += lead(100, 46.5, 112, 82, 'Piso — nível inferior', anchor='end')
+    b += lead(26, 52, 26, 82, 'Contrapiso / argamassa colante')
     b += (f'<text x="63.5" y="96" font-family="Manrope" font-size="2.35" fill="{OLIVE2}" text-anchor="middle">'
           'Aplicar somente quando o mesmo material mudar de nível. Níveis não documentados neste caderno.</text>')
     return svg(2, b)
@@ -141,7 +145,7 @@ def d4():
 
 CARDS = [
     ('D1', 'Rodapé em porcelanato — h = 8 cm', 'Corte ilustrativo · sem escala', d1),
-    ('D2', 'Perfil metálico — mesmo material com desnível', 'Corte ilustrativo · sem escala', d2),
+    ('D2', 'Perfil metálico em L — mesmo material com desnível', 'Corte ilustrativo · sem escala', d2),
     ('D3', 'Soleira baguete — mármore Itaúnas', 'Corte e planta ilustrativos · sem escala', d3),
     ('D4', 'Trilho de porta de correr embutido no piso', 'Corte ilustrativo · sem escala', d4),
 ]
