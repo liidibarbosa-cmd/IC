@@ -44,3 +44,9 @@ node imprimir.mjs       # PDF A3 + prévias (Chromium)
 | `fonte/paredes.py` | Gerador (reaproveita `pranchas.py`). Panos, alturas e aberturas estão no início do arquivo. |
 
 Regenerar: `python3 paredes.py && HTML=caderno02.html PDF="CADERNO DE DETALHAMENTO DE REVESTIMENTO DE PAREDE 02-02 - R00.pdf" PREVIA=parede node imprimir.mjs`
+
+## Lista técnica para orçamento — Bandini (Rev. 00)
+
+- `LISTA TECNICA PARA ORCAMENTO - BANDINI - R00.pdf` — A4 paisagem, 10 folhas: revestimentos de piso e parede (m² líquidos e caixas), complementos, louças e metais por ambiente (com fotos), consolidado por referência, itens fora da Bandini, não orçar e confirmações com a loja.
+- `quantitativos/ORCAMENTO BANDINI - REVESTIMENTOS LOUCAS E METAIS - R00.xlsx` — mesma lista com colunas de preço (amarelas) e totais por fórmula.
+- Fonte: `fonte/orcamento.py` (gera `orcamento.html` e a planilha) e `fonte/orc_imprimir.mjs` (PDF).
