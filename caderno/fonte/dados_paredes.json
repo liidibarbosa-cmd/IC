@@ -1,0 +1,928 @@
+{
+ "produtos": {
+  "RP01": {
+   "nome": "Pedra Moledo",
+   "fab": "Pedreira (compra à parte)",
+   "formato": "A CONFIRMAR",
+   "esp": "A CONFIRMAR",
+   "acab": "Natural (pedra)",
+   "rejunte": "A CONFIRMAR",
+   "linha": "#3fa7d6",
+   "fill": "#dfe6e2"
+  },
+  "RP02": {
+   "nome": "Porcelanato Santorini OFW NAT",
+   "fab": "Portinari",
+   "formato": "90 × 90 cm",
+   "esp": "7,0 mm",
+   "acab": "Natural (NAT), retificado",
+   "rejunte": "Corda · junta seca",
+   "linha": "#2c58a0",
+   "fill": "#ecdfc4"
+  },
+  "RP03": {
+   "nome": "Porcelanato Confete WH NAT",
+   "fab": "CEUSA · cód. 5041209A",
+   "formato": "100 × 100 cm",
+   "esp": "9,0 mm",
+   "acab": "Natural, retificado",
+   "rejunte": "A CONFIRMAR",
+   "linha": "#e3bf3c",
+   "fill": "#f6f3ec"
+  },
+  "RP04": {
+   "nome": "Porcelanato Confete PK NAT (Pink)",
+   "fab": "CEUSA · cód. 5041210A",
+   "formato": "100 × 100 cm",
+   "esp": "9,0 mm",
+   "acab": "Natural, retificado",
+   "rejunte": "Sugestão do fabricante: Quartzolit Preto Grafite, Rejuntabras Marfim ou Quartzobras Castor",
+   "linha": "#d64f8e",
+   "fill": "#f1d6dc"
+  },
+  "RP05": {
+   "nome": "Revestimento Fatto Oliva AC",
+   "fab": "Decortiles · SC 8068139",
+   "formato": "30 × 90 cm",
+   "esp": "A CONFIRMAR",
+   "acab": "Acetinado (AC), V1",
+   "rejunte": "A CONFIRMAR",
+   "linha": "#5f8d34",
+   "fill": "#b5b98c"
+  },
+  "RP06": {
+   "nome": "Travertino Rock Face",
+   "fab": "Pedreira (compra à parte)",
+   "formato": "A CONFIRMAR",
+   "esp": "A CONFIRMAR",
+   "acab": "Rock face (bruto)",
+   "rejunte": "A CONFIRMAR",
+   "linha": "#7a4aa3",
+   "fill": "#e4d6bd"
+  },
+  "RP07": {
+   "nome": "Cerâmica simples — Eliane Forma Branco AC (fundo da marcenaria)",
+   "fab": "Eliane · SC 8039383",
+   "formato": "30 × 40 cm",
+   "esp": "6,5 mm",
+   "acab": "Acetinado, V1",
+   "rejunte": "Junta 2 mm (fabricante) · cor A CONFIRMAR",
+   "linha": "#e0a01e",
+   "fill": "#fbfaf6"
+  }
+ },
+ "panos": [
+  {
+   "id": "F-S",
+   "elev": "E01",
+   "cod": "RP01",
+   "amb": "Sala — fachada sul (externa)",
+   "parede": "face externa sul, x 11,441 → 15,341",
+   "a": [
+    11.441,
+    19.536
+   ],
+   "b": [
+    15.341,
+    19.536
+   ],
+   "lado": [
+    13.4,
+    19.2
+   ],
+   "alt": 3.2,
+   "larg": 3.9,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 12.48,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 12.48,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": "Inclui a face do pilar junto à garagem (0,15 m), conforme imagem enviada"
+  },
+  {
+   "id": "F-L",
+   "elev": "E02",
+   "cod": "RP01",
+   "amb": "Sala — fachada leste (externa)",
+   "parede": "face externa leste, y 19,536 → 24,055 (até o muro)",
+   "a": [
+    15.341,
+    19.536
+   ],
+   "b": [
+    15.341,
+    24.055
+   ],
+   "lado": [
+    15.7,
+    21.8
+   ],
+   "alt": 3.2,
+   "larg": 4.519,
+   "aberturas": [
+    [
+     "J01",
+     2.5,
+     2.5,
+     0.5
+    ]
+   ],
+   "pos": [
+    0.7
+   ],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 14.4608,
+   "desc": 6.25,
+   "nicho_m2": 0.0,
+   "liq": 8.2108,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": "Desconta só a janela J01; pedra abaixo, acima e dos lados"
+  },
+  {
+   "id": "S-TV",
+   "elev": "E03",
+   "cod": "RP01",
+   "amb": "Sala — parede da TV (interna)",
+   "parede": "face interna sul, x 11,591 → 15,191",
+   "a": [
+    11.591,
+    19.686
+   ],
+   "b": [
+    15.191,
+    19.686
+   ],
+   "lado": [
+    13.4,
+    20.0
+   ],
+   "alt": 3.4,
+   "larg": 3.6,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 12.24,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 12.24,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": "Parede toda; PD 3,40 m do DWG (imagem cota 3,75 × 3,591 m)"
+  },
+  {
+   "id": "E04-L1",
+   "elev": "E04",
+   "cod": "RP02",
+   "amb": "Banheiro Casal",
+   "parede": "lateral do box (0,90 m)",
+   "a": [
+    6.141,
+    37.286
+   ],
+   "b": [
+    6.141,
+    36.386
+   ],
+   "lado": [
+    6.0,
+    36.8
+   ],
+   "alt": 2.85,
+   "larg": 0.9,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 2.565,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 2.565,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": ""
+  },
+  {
+   "id": "E04-F",
+   "elev": "E04",
+   "cod": "RP03",
+   "amb": "Banheiro Casal",
+   "parede": "fundo do box (parede da janela / nicho)",
+   "a": [
+    6.141,
+    36.386
+   ],
+   "b": [
+    4.191,
+    36.386
+   ],
+   "lado": [
+    5.2,
+    36.5
+   ],
+   "alt": 2.85,
+   "larg": 1.95,
+   "aberturas": [
+    [
+     "J04",
+     1.0,
+     0.6,
+     1.5
+    ]
+   ],
+   "pos": [
+    0.7750000000000004
+   ],
+   "nicho": true,
+   "faixa": null,
+   "bruta": 5.5575,
+   "desc": 0.6,
+   "nicho_m2": 0.45,
+   "liq": 5.4075,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": ""
+  },
+  {
+   "id": "E04-L2",
+   "elev": "E04",
+   "cod": "RP02",
+   "amb": "Banheiro Casal",
+   "parede": "lateral do box (0,90 m)",
+   "a": [
+    4.191,
+    36.386
+   ],
+   "b": [
+    4.191,
+    37.286
+   ],
+   "lado": [
+    4.3,
+    36.8
+   ],
+   "alt": 2.85,
+   "larg": 0.9,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 2.565,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 2.565,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": ""
+  },
+  {
+   "id": "E05-L1",
+   "elev": "E05",
+   "cod": "RP02",
+   "amb": "WC 02",
+   "parede": "lateral do box (0,90 m)",
+   "a": [
+    7.191,
+    31.586
+   ],
+   "b": [
+    6.291,
+    31.586
+   ],
+   "lado": [
+    6.7,
+    31.7
+   ],
+   "alt": 2.85,
+   "larg": 0.9,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 2.565,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 2.565,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": ""
+  },
+  {
+   "id": "E05-F",
+   "elev": "E05",
+   "cod": "RP04",
+   "amb": "WC 02",
+   "parede": "fundo do box (parede da janela / nicho)",
+   "a": [
+    6.291,
+    31.586
+   ],
+   "b": [
+    6.291,
+    33.086
+   ],
+   "lado": [
+    6.4,
+    32.3
+   ],
+   "alt": 2.85,
+   "larg": 1.5,
+   "aberturas": [
+    [
+     "J04",
+     1.0,
+     0.6,
+     1.5
+    ]
+   ],
+   "pos": [
+    0.22500000000000142
+   ],
+   "nicho": true,
+   "faixa": null,
+   "bruta": 4.275,
+   "desc": 0.6,
+   "nicho_m2": 0.36,
+   "liq": 4.035,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": ""
+  },
+  {
+   "id": "E05-L2",
+   "elev": "E05",
+   "cod": "RP02",
+   "amb": "WC 02",
+   "parede": "lateral do box (0,90 m)",
+   "a": [
+    6.291,
+    33.086
+   ],
+   "b": [
+    7.191,
+    33.086
+   ],
+   "lado": [
+    6.7,
+    33.0
+   ],
+   "alt": 2.85,
+   "larg": 0.9,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 2.565,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 2.565,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": ""
+  },
+  {
+   "id": "E06-L1",
+   "elev": "E06",
+   "cod": "RP02",
+   "amb": "WC 01",
+   "parede": "lateral do box (0,90 m)",
+   "a": [
+    7.191,
+    29.936
+   ],
+   "b": [
+    6.291,
+    29.936
+   ],
+   "lado": [
+    6.7,
+    30.05
+   ],
+   "alt": 2.85,
+   "larg": 0.9,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 2.565,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 2.565,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": ""
+  },
+  {
+   "id": "E06-F",
+   "elev": "E06",
+   "cod": "RP04",
+   "amb": "WC 01",
+   "parede": "fundo do box (parede da janela / nicho)",
+   "a": [
+    6.291,
+    29.936
+   ],
+   "b": [
+    6.291,
+    31.436
+   ],
+   "lado": [
+    6.4,
+    30.7
+   ],
+   "alt": 2.85,
+   "larg": 1.5,
+   "aberturas": [
+    [
+     "J04",
+     1.0,
+     0.6,
+     1.5
+    ]
+   ],
+   "pos": [
+    0.22500000000000142
+   ],
+   "nicho": true,
+   "faixa": null,
+   "bruta": 4.275,
+   "desc": 0.6,
+   "nicho_m2": 0.36,
+   "liq": 4.035,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": ""
+  },
+  {
+   "id": "E06-L2",
+   "elev": "E06",
+   "cod": "RP02",
+   "amb": "WC 01",
+   "parede": "lateral do box (0,90 m)",
+   "a": [
+    6.291,
+    31.436
+   ],
+   "b": [
+    7.191,
+    31.436
+   ],
+   "lado": [
+    6.7,
+    31.35
+   ],
+   "alt": 2.85,
+   "larg": 0.9,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 2.565,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 2.565,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": ""
+  },
+  {
+   "id": "E07-L1",
+   "elev": "E07",
+   "cod": "RP02",
+   "amb": "Banheiro Externo",
+   "parede": "lateral do box (0,90 m)",
+   "a": [
+    12.191,
+    32.486
+   ],
+   "b": [
+    11.291,
+    32.486
+   ],
+   "lado": [
+    11.7,
+    32.6
+   ],
+   "alt": 2.85,
+   "larg": 0.9,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 2.565,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 2.565,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": ""
+  },
+  {
+   "id": "E07-F",
+   "elev": "E07",
+   "cod": "RP05",
+   "amb": "Banheiro Externo",
+   "parede": "fundo do box (parede da janela / nicho)",
+   "a": [
+    11.291,
+    32.486
+   ],
+   "b": [
+    11.291,
+    33.886
+   ],
+   "lado": [
+    11.4,
+    33.2
+   ],
+   "alt": 2.85,
+   "larg": 1.4,
+   "aberturas": [],
+   "pos": [],
+   "nicho": true,
+   "faixa": null,
+   "bruta": 3.99,
+   "desc": 0,
+   "nicho_m2": 0.34,
+   "liq": 4.33,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": ""
+  },
+  {
+   "id": "E07-L2",
+   "elev": "E07",
+   "cod": "RP02",
+   "amb": "Banheiro Externo",
+   "parede": "lateral do box (0,90 m)",
+   "a": [
+    11.291,
+    33.886
+   ],
+   "b": [
+    12.191,
+    33.886
+   ],
+   "lado": [
+    11.7,
+    33.8
+   ],
+   "alt": 2.85,
+   "larg": 0.9,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 2.565,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 2.565,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": ""
+  },
+  {
+   "id": "LAV",
+   "elev": "E08",
+   "cod": "RP02",
+   "amb": "Lavanderia",
+   "parede": "parede inferior inteira (divisa com a garagem)",
+   "a": [
+    8.441,
+    20.286
+   ],
+   "b": [
+    5.691,
+    20.286
+   ],
+   "lado": [
+    7.0,
+    20.4
+   ],
+   "alt": 2.85,
+   "larg": 2.75,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 7.8375,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 7.8375,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": ""
+  },
+  {
+   "id": "COZ-O",
+   "elev": "E09",
+   "cod": "RP07",
+   "amb": "Cozinha",
+   "parede": "parede esquerda inteira",
+   "a": [
+    5.691,
+    22.436
+   ],
+   "b": [
+    5.691,
+    26.636
+   ],
+   "lado": [
+    5.8,
+    24.5
+   ],
+   "alt": 2.85,
+   "larg": 4.2,
+   "aberturas": [
+    [
+     "J02",
+     2.35,
+     0.45,
+     1.1
+    ]
+   ],
+   "pos": [
+    1.3249999999999993
+   ],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 11.97,
+   "desc": 1.0575,
+   "nicho_m2": 0.0,
+   "liq": 10.9125,
+   "controle": [
+    "Arquivo",
+    "Informado",
+    "Obra"
+   ],
+   "obs": "Altura = PD 2,85 m (paredes inteiras, informado)"
+  },
+  {
+   "id": "COZ-N",
+   "elev": "E09",
+   "cod": "RP07",
+   "amb": "Cozinha",
+   "parede": "parede superior inteira",
+   "a": [
+    5.691,
+    26.636
+   ],
+   "b": [
+    9.941,
+    26.636
+   ],
+   "lado": [
+    7.8,
+    26.5
+   ],
+   "alt": 2.85,
+   "larg": 4.25,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 12.1125,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 12.1125,
+   "controle": [
+    "Arquivo",
+    "Informado",
+    "Obra"
+   ],
+   "obs": "Altura = PD 2,85 m (paredes inteiras, informado)"
+  },
+  {
+   "id": "BAL-S",
+   "elev": "E10",
+   "cod": "RP02",
+   "amb": "Cozinha — balcão",
+   "parede": "face sul da mureta 1,90 × 0,15 (DWG Prefeitura)",
+   "a": [
+    9.141,
+    24.036
+   ],
+   "b": [
+    7.241,
+    24.036
+   ],
+   "lado": [
+    8.2,
+    23.95
+   ],
+   "alt": 1.0,
+   "larg": 1.9,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 1.9,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 1.9,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": ""
+  },
+  {
+   "id": "BAL-N",
+   "elev": "E10",
+   "cod": "RP02",
+   "amb": "Cozinha — balcão",
+   "parede": "face norte da mureta 1,90 × 0,15 (DWG Prefeitura)",
+   "a": [
+    7.241,
+    24.186
+   ],
+   "b": [
+    9.141,
+    24.186
+   ],
+   "lado": [
+    8.2,
+    24.27
+   ],
+   "alt": 1.0,
+   "larg": 1.9,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 1.9,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 1.9,
+   "controle": [
+    "Arquivo",
+    "Informado"
+   ],
+   "obs": ""
+  },
+  {
+   "id": "VAR-F",
+   "elev": "E11",
+   "cod": "RP06",
+   "amb": "Varanda Gourmet",
+   "parede": "faixa da bancada: 2,75 m, de 0,98 a 1,48 m, junto à churrasqueira",
+   "a": [
+    11.291,
+    28.686
+   ],
+   "b": [
+    11.291,
+    31.436
+   ],
+   "lado": [
+    11.4,
+    30.0
+   ],
+   "alt": 3.4,
+   "larg": 2.75,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": [
+    0.85,
+    3.6,
+    0.98,
+    1.48
+   ],
+   "bruta": 1.375,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 1.375,
+   "controle": [
+    "Arquivo",
+    "Informado",
+    "Obra"
+   ],
+   "obs": "Posição ao longo da parede: junto à churrasqueira, conforme elevação enviada"
+  },
+  {
+   "id": "CH-F",
+   "elev": "E11",
+   "cod": "RP06",
+   "amb": "Varanda Gourmet — churrasqueira",
+   "parede": "frente (0,90 × 3,40 m)",
+   "a": [
+    12.091,
+    31.436
+   ],
+   "b": [
+    12.091,
+    32.336
+   ],
+   "lado": [
+    12.2,
+    31.9
+   ],
+   "alt": 3.4,
+   "larg": 0.9,
+   "aberturas": [
+    [
+     "Boca da churrasqueira",
+     0.8,
+     0.8,
+     null
+    ]
+   ],
+   "pos": [
+    0.05
+   ],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 3.06,
+   "desc": 0.64,
+   "nicho_m2": 0.0,
+   "liq": 2.42,
+   "controle": [
+    "Informado",
+    "Obra"
+   ],
+   "obs": "Desconta a boca 0,80 × 0,80; posição vertical da boca A CONFIRMAR"
+  },
+  {
+   "id": "CH-L",
+   "elev": "E12",
+   "cod": "RP06",
+   "amb": "Varanda Gourmet — churrasqueira",
+   "parede": "lateral esquerda (0,80 × 3,40 m)",
+   "a": [
+    11.291,
+    31.436
+   ],
+   "b": [
+    12.091,
+    31.436
+   ],
+   "lado": [
+    11.7,
+    31.3
+   ],
+   "alt": 3.4,
+   "larg": 0.8,
+   "aberturas": [],
+   "pos": [],
+   "nicho": false,
+   "faixa": null,
+   "bruta": 2.72,
+   "desc": 0,
+   "nicho_m2": 0.0,
+   "liq": 2.72,
+   "controle": [
+    "Informado"
+   ],
+   "obs": "Lateral direita encostada na parede do Banheiro Externo: sem revestimento"
+  }
+ ],
+ "totais": {
+  "RP01": 32.9308,
+  "RP02": 32.1575,
+  "RP03": 5.4075,
+  "RP04": 8.07,
+  "RP05": 4.33,
+  "RP07": 23.025,
+  "RP06": 6.515
+ }
+}

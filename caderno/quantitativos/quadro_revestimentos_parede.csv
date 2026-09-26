@@ -1,0 +1,32 @@
+﻿codigo;produto;fabricante;elevacao;ambiente;pano;x_ini;y_ini;x_fim;y_fim;largura_m;altura_m;area_bruta_m2;aberturas;desconto_m2;acrescimo_nicho_m2;area_liquida_m2;observacao;controle
+RP01;Pedra Moledo;Pedreira (compra à parte);E01;Sala — fachada sul (externa);face externa sul, x 11,441 → 15,341;11,441;19,536;15,341;19,536;3,900;3,20;12,4800;;0,0000;0,0000;12,4800;Inclui a face do pilar junto à garagem (0,15 m), conforme imagem enviada;Arquivo + Informado
+RP01;Pedra Moledo;Pedreira (compra à parte);E02;Sala — fachada leste (externa);face externa leste, y 19,536 → 24,055 (até o muro);15,341;19,536;15,341;24,055;4,519;3,20;14,4608;J01 2,50x2,50;6,2500;0,0000;8,2108;"Desconta só a janela J01; pedra abaixo, acima e dos lados";Arquivo + Informado
+RP01;Pedra Moledo;Pedreira (compra à parte);E03;Sala — parede da TV (interna);face interna sul, x 11,591 → 15,191;11,591;19,686;15,191;19,686;3,600;3,40;12,2400;;0,0000;0,0000;12,2400;"Parede toda; PD 3,40 m do DWG (imagem cota 3,75 × 3,591 m)";Arquivo + Informado
+RP02;Porcelanato Santorini OFW NAT;Portinari;E04;Banheiro Casal;lateral do box (0,90 m);6,141;37,286;6,141;36,386;0,900;2,85;2,5650;;0,0000;0,0000;2,5650;;Arquivo + Informado
+RP03;Porcelanato Confete WH NAT;CEUSA · cód. 5041209A;E04;Banheiro Casal;fundo do box (parede da janela / nicho);6,141;36,386;4,191;36,386;1,950;2,85;5,5575;J04 1,00x0,60;0,6000;0,4500;5,4075;;Arquivo + Informado
+RP02;Porcelanato Santorini OFW NAT;Portinari;E04;Banheiro Casal;lateral do box (0,90 m);4,191;36,386;4,191;37,286;0,900;2,85;2,5650;;0,0000;0,0000;2,5650;;Arquivo + Informado
+RP02;Porcelanato Santorini OFW NAT;Portinari;E05;WC 02;lateral do box (0,90 m);7,191;31,586;6,291;31,586;0,900;2,85;2,5650;;0,0000;0,0000;2,5650;;Arquivo + Informado
+RP04;Porcelanato Confete PK NAT (Pink);CEUSA · cód. 5041210A;E05;WC 02;fundo do box (parede da janela / nicho);6,291;31,586;6,291;33,086;1,500;2,85;4,2750;J04 1,00x0,60;0,6000;0,3600;4,0350;;Arquivo + Informado
+RP02;Porcelanato Santorini OFW NAT;Portinari;E05;WC 02;lateral do box (0,90 m);6,291;33,086;7,191;33,086;0,900;2,85;2,5650;;0,0000;0,0000;2,5650;;Arquivo + Informado
+RP02;Porcelanato Santorini OFW NAT;Portinari;E06;WC 01;lateral do box (0,90 m);7,191;29,936;6,291;29,936;0,900;2,85;2,5650;;0,0000;0,0000;2,5650;;Arquivo + Informado
+RP04;Porcelanato Confete PK NAT (Pink);CEUSA · cód. 5041210A;E06;WC 01;fundo do box (parede da janela / nicho);6,291;29,936;6,291;31,436;1,500;2,85;4,2750;J04 1,00x0,60;0,6000;0,3600;4,0350;;Arquivo + Informado
+RP02;Porcelanato Santorini OFW NAT;Portinari;E06;WC 01;lateral do box (0,90 m);6,291;31,436;7,191;31,436;0,900;2,85;2,5650;;0,0000;0,0000;2,5650;;Arquivo + Informado
+RP02;Porcelanato Santorini OFW NAT;Portinari;E07;Banheiro Externo;lateral do box (0,90 m);12,191;32,486;11,291;32,486;0,900;2,85;2,5650;;0,0000;0,0000;2,5650;;Arquivo + Informado
+RP05;Revestimento Fatto Oliva AC;Decortiles · SC 8068139;E07;Banheiro Externo;fundo do box (parede da janela / nicho);11,291;32,486;11,291;33,886;1,400;2,85;3,9900;;0,0000;0,3400;4,3300;;Arquivo + Informado
+RP02;Porcelanato Santorini OFW NAT;Portinari;E07;Banheiro Externo;lateral do box (0,90 m);11,291;33,886;12,191;33,886;0,900;2,85;2,5650;;0,0000;0,0000;2,5650;;Arquivo + Informado
+RP02;Porcelanato Santorini OFW NAT;Portinari;E08;Lavanderia;parede inferior inteira (divisa com a garagem);8,441;20,286;5,691;20,286;2,750;2,85;7,8375;;0,0000;0,0000;7,8375;;Arquivo + Informado
+RP07;Cerâmica simples — Eliane Forma Branco AC (fundo da marcenaria);Eliane · SC 8039383;E09;Cozinha;parede esquerda inteira;5,691;22,436;5,691;26,636;4,200;2,85;11,9700;J02 2,35x0,45;1,0575;0,0000;10,9125;Altura = PD 2,85 m (paredes inteiras, informado);Arquivo + Informado + Obra
+RP07;Cerâmica simples — Eliane Forma Branco AC (fundo da marcenaria);Eliane · SC 8039383;E09;Cozinha;parede superior inteira;5,691;26,636;9,941;26,636;4,250;2,85;12,1125;;0,0000;0,0000;12,1125;Altura = PD 2,85 m (paredes inteiras, informado);Arquivo + Informado + Obra
+RP02;Porcelanato Santorini OFW NAT;Portinari;E10;Cozinha — balcão;face sul da mureta 1,90 × 0,15 (DWG Prefeitura);9,141;24,036;7,241;24,036;1,900;1,00;1,9000;;0,0000;0,0000;1,9000;;Arquivo + Informado
+RP02;Porcelanato Santorini OFW NAT;Portinari;E10;Cozinha — balcão;face norte da mureta 1,90 × 0,15 (DWG Prefeitura);7,241;24,186;9,141;24,186;1,900;1,00;1,9000;;0,0000;0,0000;1,9000;;Arquivo + Informado
+RP06;Travertino Rock Face;Pedreira (compra à parte);E11;Varanda Gourmet;faixa da bancada: 2,75 m, de 0,98 a 1,48 m, junto à churrasqueira;11,291;28,686;11,291;31,436;2,750;0,50;1,3750;;0,0000;0,0000;1,3750;Posição ao longo da parede: junto à churrasqueira, conforme elevação enviada;Arquivo + Informado + Obra
+RP06;Travertino Rock Face;Pedreira (compra à parte);E11;Varanda Gourmet — churrasqueira;frente (0,90 × 3,40 m);12,091;31,436;12,091;32,336;0,900;3,40;3,0600;Boca da churrasqueira 0,80x0,80;0,6400;0,0000;2,4200;"Desconta a boca 0,80 × 0,80; posição vertical da boca A CONFIRMAR";Informado + Obra
+RP06;Travertino Rock Face;Pedreira (compra à parte);E12;Varanda Gourmet — churrasqueira;lateral esquerda (0,80 × 3,40 m);11,291;31,436;12,091;31,436;0,800;3,40;2,7200;;0,0000;0,0000;2,7200;Lateral direita encostada na parede do Banheiro Externo: sem revestimento;Informado
+RP01;SUBTOTAL Pedra Moledo;;;;;;;;;;;;;;;32,9308
+RP02;SUBTOTAL Porcelanato Santorini OFW NAT;;;;;;;;;;;;;;;32,1575
+RP03;SUBTOTAL Porcelanato Confete WH NAT;;;;;;;;;;;;;;;5,4075
+RP04;SUBTOTAL Porcelanato Confete PK NAT (Pink);;;;;;;;;;;;;;;8,0700
+RP05;SUBTOTAL Revestimento Fatto Oliva AC;;;;;;;;;;;;;;;4,3300
+RP07;SUBTOTAL Cerâmica simples — Eliane Forma Branco AC (fundo da marcenaria);;;;;;;;;;;;;;;23,0250
+RP06;SUBTOTAL Travertino Rock Face;;;;;;;;;;;;;;;6,5150
+;TOTAL GERAL;;;;;;;;;;;;;;;112,4358

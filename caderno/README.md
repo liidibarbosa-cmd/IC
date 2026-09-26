@@ -31,3 +31,16 @@ node imprimir.mjs       # PDF A3 + prévias (Chromium)
 - **Dados:** áreas adotadas, fontes, controle e trechos de rodapé são editados em `fonte/dados.py`. Cada vão é validado automaticamente: o script para se um vão não estiver sobre um trecho de parede.
 - **Desenho:** estilo e posição dos rótulos são editados em `fonte/pranchas.py`.
 - **Coordenadas:** coordenadas locais = coordenadas do espaço do modelo do DWG − (3895, 760), em metros ("PLANTA DE PISO").
+
+---
+
+# Caderno de Detalhamento de Revestimento de Parede 02/02 — Rev. 00
+
+| Arquivo | Conteúdo |
+|---|---|
+| `CADERNO DE DETALHAMENTO DE REVESTIMENTO DE PAREDE 02-02 - R00.pdf` | 5 folhas A3: planta de revestimentos (1/100), quadro, elevações 1/50 (Sala/fachadas, banheiros, cozinha/lavanderia/varanda). |
+| `quantitativos/QUANTITATIVOS REVESTIMENTOS DE PAREDE - R00.xlsx` | Panos com fórmulas (largura × altura − aberturas + nicho) e ficha dos produtos. |
+| `quantitativos/quadro_revestimentos_parede.csv` | Os mesmos dados em CSV, com coordenadas das faces no DWG. |
+| `fonte/paredes.py` | Gerador (reaproveita `pranchas.py`). Panos, alturas e aberturas estão no início do arquivo. |
+
+Regenerar: `python3 paredes.py && HTML=caderno02.html PDF="CADERNO DE DETALHAMENTO DE REVESTIMENTO DE PAREDE 02-02 - R00.pdf" PREVIA=parede node imprimir.mjs`
